@@ -1,3 +1,3 @@
 # bandung-telegram-bot-golang
 
-UNDER DEVELOPMENT
+UNDER DEVELOPMENT. Please chat @mpermperpisang
