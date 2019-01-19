@@ -2,20 +2,27 @@ package private
 
 import (
 	"command"
-	"message"
+	"helper"
+	"os"
 )
 
-func SendMessage(name, text, first, last string) string {
-	var value string
+var BotName string
+
+func init() {
+	BotName = os.Getenv("BOT_BOOKING")
+}
+
+func SendMessage(text, first, last string) string {
+	var send_message string
 
 	switch text {
 	case "/start":
-		value = command.Start(first, last)
+		send_message = command.Start(first, last)
 	case "/help":
-		value = command.Help(name)
+		send_message = command.Help(BotName)
 	default:
-		value = message.DefaultCommand()
+		send_message = helper.Command()
 	}
 
-	return value
+	return send_message
 }
