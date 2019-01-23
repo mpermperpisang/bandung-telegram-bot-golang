@@ -38,7 +38,6 @@ func main() {
 	}
 
 	bot.Handle(tb.OnText, func(m *tb.Message) {
-<<<<<<< HEAD
 		var msg [6]string
 		var id [1]int
 
@@ -68,12 +67,6 @@ func main() {
 					bot.Send(m.Sender, private.SendMessage(msg[0], msg[2], msg[3], msg[5], id[0]), tb.ModeHTML)
 				}
 			}
-=======
-		if !m.Private() {
-			bot.Send(m.Chat, group.SendMessage(m.Text, m.Sender.Username), tb.ModeHTML)
-		} else {
-			bot.Send(m.Sender, private.SendMessage(m.Text, m.Chat.FirstName, m.Chat.LastName), tb.ModeHTML)
->>>>>>> 94bcef742cbe47c008f1b4ba6cd7132bb3b99c64
 		}
 	})
 
