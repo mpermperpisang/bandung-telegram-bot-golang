@@ -3,26 +3,32 @@ package command
 import (
 	"helper"
 	"message"
-	"os"
+	"strings"
 )
 
-var BotBooking string
+func MatchHelp() string {
+	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandHelp())
 
-func init() {
-	BotBooking = os.Getenv("BOT_BOOKING")
+	if pattern == true {
+		GoToFunc = Help
+	} else {
+		return send_message
+	}
+
+	return GoToFunc()
 }
 
-func Help(name string) string {
+func Help() string {
 	var content string
 
-	switch name {
-	case BotBooking:
+	switch bot_name {
+	case "stg_book_bot":
 		content = message.Booking()
 	default:
 		content = helper.Help()
 	}
 
-	var msg_help = message.Header() + content + message.Footer()
+	send_message = message.Header() + content + message.Footer()
 
-	return msg_help
+	return send_message
 }

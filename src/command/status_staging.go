@@ -4,31 +4,33 @@ import (
 	"db"
 	"helper"
 	"message"
-	"regexp"
 	"strings"
 )
 
-var Username string
+func MatchStatusStaging() string {
+	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandStatusStaging())
 
-func StatusStaging(text, username string) string {
-	Username = username
+	if pattern == true {
+		GoToFunc = StatusStaging
+	} else {
+		return send_message
+	}
 
-	return CheckEmptyStaging(text)
+	return GoToFunc()
 }
 
-func CheckEmptyStaging(text string) string {
-	var msg_status string
+func StatusStaging() string {
+	var staging string
 
-	pattern := regexp.MustCompile(helper.RegexCompileCheckEmptyStaging())
-	staging := pattern.FindString(text)
+	staging = helper.CheckEmptyStaging(text_msg)
 
 	db.StatusStaging(strings.ToUpper(staging))
 
 	if staging != "" {
-		msg_status = message.StagingStatus(staging)
+		send_message = message.StagingStatus(staging)
 	} else {
-		msg_status = message.EmptyStaging(Username)
+		send_message = message.EmptyStaging(first_name)
 	}
 
-	return msg_status
+	return send_message
 }

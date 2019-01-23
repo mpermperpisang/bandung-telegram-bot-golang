@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"helper"
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -12,10 +13,7 @@ func DBConnection() (db *sql.DB) {
 	password := os.Getenv("DB_PASSWORD")
 	schema := os.Getenv("DB_SCHEMA")
 	db, err := sql.Open("mysql", user+":"+password+"@/"+schema)
-
-	if err != nil {
-		panic(err.Error())
-	}
+	helper.ErrorMessage(err)
 
 	return db
 }

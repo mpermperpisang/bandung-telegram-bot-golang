@@ -7,3 +7,19 @@ func RegexCompileCheckEmptyStaging() string {
 func RegexCompileStatusStaging() string {
 	return `\s[a-zA-Z0-9_]+`
 }
+
+func RegexCompileStagingNumber() string {
+	return `\d+`
+}
+
+func RegexCompileStagingSquad() string {
+	return `[a-zA-Z_]+`
+}
+
+func RegexCompileBackEndOnCall() string {
+	return `\B@\S+`
+}
+
+func RegexCompileBaseCommand() string {
+	return `\/[a-z]\w+`
+}
