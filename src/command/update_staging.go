@@ -7,11 +7,11 @@ import (
 	"strings"
 )
 
-func MatchAddStaging() string {
-	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandAddStaging())
+func MatchUpdateStaging() string {
+	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandUpdateStaging())
 
 	if pattern == true {
-		GoToFunc = AddStaging
+		GoToFunc = UpdateStaging
 	} else {
 		return send_message
 	}
@@ -19,15 +19,15 @@ func MatchAddStaging() string {
 	return GoToFunc()
 }
 
-func AddStaging() string {
+func UpdateStaging() string {
 	var staging string
 
 	staging = helper.CheckEmptySquadStaging(text_msg)
 
-	db.AddStaging(strings.ToUpper(staging))
+	db.UpdateStaging(strings.ToUpper(staging))
 
 	if staging != "" {
-		send_message = message.AddStaging(staging)
+		send_message = message.UpdateStaging(staging)
 	} else {
 		send_message = message.EmptySquadStaging(first_name)
 	}

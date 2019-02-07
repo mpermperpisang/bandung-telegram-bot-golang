@@ -7,7 +7,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func AddStaging(staging string) {
+func UpdateStaging(staging string) {
 	db := DBConnection()
 	file := helper.CreateFile()
 	pattern := regexp.MustCompile(helper.RegexCompileStagingNumber())
@@ -17,14 +17,9 @@ func AddStaging(staging string) {
 	defer file.Close()
 
 	for _, match := range stgNumber {
-		_, err := db.Exec("INSERT INTO booking_staging VALUES ('" + match + "', 'book', '0', 'book', 'done', '" + stgSquad + "')")
+		_, err := db.Exec("UPDATE booking_staging SET book_squad='" + stgSquad + "' where book_staging='" + match + "'")
 		helper.ErrorMessage(err)
 
-		if err != nil {
-			file.WriteString("\n- <b>staging" + match + ".vm</b> sudah terdaftar")
-		} else {
-			file.WriteString("\n- <b>staging" + match + ".vm</b> berhasil ditambahkan")
-		}
-
+		file.WriteString("\n- staging" + match + ".vm")
 	}
 }

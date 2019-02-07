@@ -11,7 +11,22 @@ func AddStaging(staging string) string {
 	content := string(data)
 
 	if content != "" {
-		header = "Staging berhasil ditambahkan :"
+		header = "Status :"
+	} else {
+		header = StagingNotFound(staging)
+	}
+
+	return header + content
+}
+
+func UpdateStaging(staging string) string {
+	var header string
+
+	data, _ := ioutil.ReadFile("temp.go")
+	content := string(data)
+
+	if content != "" {
+		header = "Staging berhasil diubah :"
 	} else {
 		header = StagingNotFound(staging)
 	}

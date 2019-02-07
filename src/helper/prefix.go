@@ -31,3 +31,7 @@ func PrefixCommandAddOnCall() string {
 func PrefixCommandOnCall() string {
 	return "/oncall"
 }
+
+func PrefixCommandUpdateStaging() string {
+	return "/update_staging"
+}

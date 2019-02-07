@@ -50,7 +50,7 @@ func main() {
 		id[0] = m.Sender.ID
 
 		commandPrivate := []string{"/help", "/start"}
-		commandGroup := []string{"/status_staging", "/add_staging", "/booking", "/done", "/add_oncall", "/oncall"}
+		commandGroup := []string{"/status_staging", "/add_staging", "/update_staging", "/booking", "/done", "/add_oncall", "/oncall"}
 
 		baseCommand := regexp.MustCompile(helper.RegexCompileBaseCommand()).FindString(m.Text)
 

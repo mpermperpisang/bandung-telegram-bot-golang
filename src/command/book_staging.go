@@ -29,7 +29,7 @@ func BookStaging() string {
 	if staging != "" {
 		send_message = message.BookStaging(first_name, staging)
 	} else {
-		send_message = message.EmptyStaging(first_name)
+		send_message = message.EmptyBookDoneStaging(first_name)
 	}
 
 	return send_message
