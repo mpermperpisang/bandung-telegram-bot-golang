@@ -27,7 +27,7 @@ func Booking() string {
 		"6. Add DANA squad backend oncall schedule (BOTH)\n" +
 		"<b>/add_oncall@" + botName + " backend_username1 backend_username2 backend_username3</b>\n\n" +
 
-		"7. Calling DANA squad backend on duty(GROUP)\n" +
+		"7. Calling DANA squad backend on duty (GROUP)\n" +
 		"<b>/oncall@" + botName + "</b>\n\n" +
 
 		"🐾 You can use any staging"
