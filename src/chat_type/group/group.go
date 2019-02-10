@@ -1,8 +1,6 @@
 package group
 
-import (
-	"command"
-)
+import "command"
 
 func SendMessage(text, username, title, BotName string, id int) string {
 	var send_message string

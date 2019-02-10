@@ -26,7 +26,7 @@ func UpdateStaging(staging string) string {
 	content := string(data)
 
 	if content != "" {
-		header = "Staging berhasil diubah :"
+		header = "Staging berhasil diubah ke squad "
 	} else {
 		header = StagingNotFound(staging)
 	}

@@ -24,7 +24,7 @@ func MatchAddOnCall() string {
 
 func AddOnCall() string {
 	var z string
-	var a, j int
+	var j int
 	var k = -1
 	var t = time.Now()
 	var sheet = helper.GoogleSheet()
@@ -33,17 +33,14 @@ func AddOnCall() string {
 	backend := pattern.FindAllString(text_msg, -1)
 	year, _ := strconv.Atoi(t.Format("2006"))
 
-	s := make([]byte, 100)
-	rand.Read(s)
-
 	for j = 1; j <= 12; j++ {
 		lastday := time.Date(year, time.Month(j+1), 0, 0, 0, 0, 0, time.UTC)
 		value, _ := strconv.Atoi(lastday.Format("02"))
+		index := rand.Perm(len(backend))
 
 		for x := 0; x < 10; x++ {
-			// for _, match := range backend {
-			for a = 0; a < len(backend); a++ {
-				m := rand.Intn(6)
+			for _, match := range index {
+
 				for i := 0; i < 2; i++ {
 					one := time.Date(year, time.Month(j), k+1, 23, 0, 0, 0, time.UTC)
 					two := time.Date(year, time.Month(j), 1, 23, 0, 0, 0, time.UTC)
@@ -63,8 +60,7 @@ func AddOnCall() string {
 						if k >= value {
 							z = ""
 						} else {
-							// z = match
-							z = backend[m]
+							z = backend[match]
 						}
 
 						sheet.Update(k, j-1, z)

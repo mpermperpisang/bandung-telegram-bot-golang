@@ -10,6 +10,7 @@ import (
 
 func StatusStaging(staging string) {
 	var stagingName, status, branch, username, user string
+	var stgArray []string
 
 	db := DBConnection()
 	file := helper.CreateFile()
@@ -19,26 +20,31 @@ func StatusStaging(staging string) {
 	defer file.Close()
 
 	for _, match := range stg {
-		stgMatch := strings.Trim(match, " ")
-		rows, err := db.Query("SELECT book_staging, book_status, book_branch, book_name FROM booking_staging WHERE (book_staging='" + stgMatch + "' or book_squad='" + stgMatch + "')")
-		helper.ErrorMessage(err)
-
-		for rows.Next() {
-			err = rows.Scan(&stagingName, &status, &branch, &username)
+		includeStaging, _ := helper.IncludeArray(match, stgArray)
+		if includeStaging == false {
+			stgMatch := strings.Trim(match, " ")
+			rows, err := db.Query("SELECT book_staging, book_status, book_branch, book_name FROM booking_staging WHERE (book_staging='" + stgMatch + "' or book_squad='" + stgMatch + "')")
 			helper.ErrorMessage(err)
 
-			if status == "done" {
-				user = "<code>@" + username + "</code>"
-			} else {
-				user = "@" + username
+			for rows.Next() {
+				err = rows.Scan(&stagingName, &status, &branch, &username)
+				helper.ErrorMessage(err)
+
+				if status == "done" {
+					user = "<code>@" + username + "</code>"
+				} else {
+					user = "@" + username
+				}
+
+				content := "<code>Staging" + stagingName + "</code> : <b>" + strings.ToUpper(status) + "</b>\n" + branch + "\n" + user + "\n\n"
+
+				file.WriteString(content)
 			}
 
-			content := "<code>Staging" + stagingName + "</code> : <b>" + strings.ToUpper(status) + "</b>\n" + branch + "\n" + user + "\n\n"
+			stgArray = append(stgArray, match)
 
-			file.WriteString(content)
+			err = rows.Err()
+			helper.ErrorMessage(err)
 		}
-
-		err = rows.Err()
-		helper.ErrorMessage(err)
 	}
 }

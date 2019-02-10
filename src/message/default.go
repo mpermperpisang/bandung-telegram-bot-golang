@@ -7,3 +7,8 @@ func DefaultHelp() string {
 func DefaultCommand() string {
 	return "Ngetik apa sih, Kak?"
 }
+
+func OnlineMessage(name string) string {
+	return name + " : <b>ONLINE</b>" +
+		"\n\nJangan lupa semangat yaa, Kak. 🥰"
+}
