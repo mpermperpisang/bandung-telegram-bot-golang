@@ -3,6 +3,7 @@ package command
 import (
 	"helper"
 	"message"
+	"os"
 	"strings"
 )
 
@@ -22,7 +23,7 @@ func Help() string {
 	var content string
 
 	switch bot_name {
-	case "stg_book_bot":
+	case os.Getenv("BOT_BOOKING"):
 		content = message.Booking()
 	default:
 		content = helper.Help()
