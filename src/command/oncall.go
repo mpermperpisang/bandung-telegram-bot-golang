@@ -29,7 +29,13 @@ func OnCall() string {
 	date, _ := strconv.Atoi(t.Format("02"))
 	imonth = int(month) - 1
 	idate = int(date) - 1
-	send_message = message.OnCall(sheet.Columns[imonth][idate].Value)
+	contentsheet := sheet.Columns[imonth][idate].Value
+
+	if contentsheet == "" {
+		send_message = message.HolidayOnCall()
+	} else {
+		send_message = message.OnCall(sheet.Columns[imonth][idate].Value)
+	}
 
 	return send_message
 }

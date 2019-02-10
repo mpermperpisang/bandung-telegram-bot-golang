@@ -16,5 +16,5 @@ func StagingNotFound(staging string) string {
 
 func EmptySquadStaging(username string) string {
 	return "Commandnya belum benar, Kak @" + username + "\n" +
-		"Contoh : /add_staging squad_name 21 51 103"
+		"Contoh : /add_staging squad_name staging_number1 staging_number2 staging_number3"
 }

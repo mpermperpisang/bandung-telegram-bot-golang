@@ -68,7 +68,7 @@ func main() {
 			for i := 0; i < len(commandGroup); i++ {
 				if baseCommand == commandGroup[i] {
 					bot.Send(m.Chat, group.SendMessage(msg[0], msg[1], msg[4], msg[5], id[0]), tb.ModeHTML)
-					// bot.Delete(m)
+					bot.Delete(m)
 				}
 			}
 		} else {
