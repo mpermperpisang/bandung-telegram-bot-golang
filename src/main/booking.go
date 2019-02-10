@@ -60,7 +60,7 @@ func main() {
 		msg[5] = BotUsername
 		id[0] = m.Sender.ID
 
-		commandPrivate := []string{"/help", "/start"}
+		commandPrivate := []string{"/help", "/start", "/add_oncall"}
 		commandGroup := []string{"/status_staging", "/add_staging", "/update_staging", "/booking", "/done", "/add_oncall", "/oncall"}
 		baseCommand := regexp.MustCompile(helper.RegexCompileBaseCommand()).FindString(m.Text)
 
