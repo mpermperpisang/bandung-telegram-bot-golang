@@ -37,9 +37,8 @@ func AddOnCall() string {
 		value, _ := strconv.Atoi(lastday.Format("02"))
 		index := rand.Perm(len(backend))
 
-		for x := 0; x < 10; x++ {
+		for x := 0; x < 5; x++ {
 			for _, match := range index {
-
 				for i := 0; i < 2; i++ {
 					one := time.Date(year, time.Month(j), k+1, 23, 0, 0, 0, time.UTC)
 					two := time.Date(year, time.Month(j), 1, 23, 0, 0, 0, time.UTC)
@@ -56,13 +55,10 @@ func AddOnCall() string {
 							k = k + 3
 						}
 
-						if k >= value {
-							z = ""
-						} else {
+						if k < value {
 							z = backend[match]
+							sheet.Update(k, j-1, z)
 						}
-
-						sheet.Update(k, j-1, z)
 					}
 				}
 			}
