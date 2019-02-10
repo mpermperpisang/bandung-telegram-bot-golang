@@ -25,50 +25,57 @@ func MatchAddOnCall() string {
 func AddOnCall() string {
 	var z string
 	var k = -1
-	var t = time.Now()
 	var sheet = helper.GoogleSheet()
 
-	pattern := regexp.MustCompile(helper.RegexCompileBackEndOnCall())
-	backend := pattern.FindAllString(text_msg, -1)
+	t := time.Now()
 	year, _ := strconv.Atoi(t.Format("2006"))
 
-	for j := 1; j <= 12; j++ {
-		lastday := time.Date(year, time.Month(j+1), 0, 0, 0, 0, 0, time.UTC)
-		value, _ := strconv.Atoi(lastday.Format("02"))
-		index := rand.Perm(len(backend))
+	if sheet == nil {
+		send_message = message.EmptyTabSheet(strconv.Itoa(year))
+	} else {
 
-		for x := 0; x < 5; x++ {
-			for _, match := range index {
-				for i := 0; i < 2; i++ {
-					one := time.Date(year, time.Month(j), k+1, 23, 0, 0, 0, time.UTC)
-					two := time.Date(year, time.Month(j), 1, 23, 0, 0, 0, time.UTC)
+		pattern := regexp.MustCompile(helper.RegexCompileBackEndOnCall())
+		backend := pattern.FindAllString(text_msg, -1)
 
-					if k+1 < value {
-						if int(one.Weekday()) < 5 && int(one.Weekday()) > 0 {
-							k = k + 1
-						} else {
-							if int(two.Weekday()) == 0 {
-								if k == -1 {
-									k = k + -1
+		for j := 1; j <= 12; j++ {
+			lastday := time.Date(year, time.Month(j+1), 0, 0, 0, 0, 0, time.UTC)
+			value, _ := strconv.Atoi(lastday.Format("02"))
+			index := rand.Perm(len(backend))
+
+			for x := 0; x < 5; x++ {
+				for _, match := range index {
+					for i := 0; i < 2; i++ {
+						one := time.Date(year, time.Month(j), k+1, 23, 0, 0, 0, time.UTC)
+						two := time.Date(year, time.Month(j), 1, 23, 0, 0, 0, time.UTC)
+
+						if k+1 < value {
+							if int(one.Weekday()) < 5 && int(one.Weekday()) > 0 {
+								k = k + 1
+							} else {
+								if int(two.Weekday()) == 0 {
+									if k == -1 {
+										k = k + -1
+									}
 								}
+								k = k + 3
 							}
-							k = k + 3
-						}
 
-						if k < value {
-							z = backend[match]
-							sheet.Update(k, j-1, z)
+							if k < value {
+								z = backend[match]
+								sheet.Update(k, j-1, z)
+							}
 						}
 					}
 				}
 			}
+			k = -1
 		}
-		k = -1
+
+		err := sheet.Synchronize()
+		helper.ErrorMessage(err)
+
+		send_message = message.AddOnCall(t.Format("2006"))
 	}
 
-	err := sheet.Synchronize()
-	helper.ErrorMessage(err)
-
-	send_message = message.AddOnCall(t.Format("2006"))
 	return send_message
 }

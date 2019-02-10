@@ -18,3 +18,9 @@ func EmptySquadStaging(username string) string {
 	return "Commandnya belum benar, Kak @" + username + "\n" +
 		"Contoh : /add_staging squad_name staging_number1 staging_number2 staging_number3"
 }
+
+func HappyNewYear() string {
+	return "Selamat Tahun Baru, Kakak-kakak\n" +
+		"Mau ngingetin nih, jadwal BE oncallnya tolong diperbarui yaa\n" +
+		"Happy holiday 🥳🎉"
+}

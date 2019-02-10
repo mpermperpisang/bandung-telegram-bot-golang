@@ -27,14 +27,20 @@ func OnCall() string {
 	t := time.Now()
 	month, _ := strconv.Atoi(t.Format("01"))
 	date, _ := strconv.Atoi(t.Format("02"))
-	imonth = int(month) - 1
-	idate = int(date) - 1
-	contentsheet := sheet.Columns[imonth][idate].Value
+	year, _ := strconv.Atoi(t.Format("2006"))
 
-	if contentsheet == "" {
-		send_message = message.HolidayOnCall()
+	if sheet == nil || sheet.Columns[imonth][idate].Value == "" {
+		send_message = message.EmptyOnCall(strconv.Itoa(year))
 	} else {
-		send_message = message.OnCall(sheet.Columns[imonth][idate].Value)
+		imonth = int(month) - 1
+		idate = int(date) - 1
+		contentsheet := sheet.Columns[imonth][idate].Value
+
+		if contentsheet == "" {
+			send_message = message.HolidayOnCall()
+		} else {
+			send_message = message.OnCall(sheet.Columns[imonth][idate].Value)
+		}
 	}
 
 	return send_message
