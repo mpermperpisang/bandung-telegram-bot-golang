@@ -14,6 +14,7 @@ func IncludeArray(val interface{}, array interface{}) (exists bool, index int) {
 			if reflect.DeepEqual(val, s.Index(i).Interface()) == true {
 				index = i
 				exists = true
+
 				return
 			}
 		}

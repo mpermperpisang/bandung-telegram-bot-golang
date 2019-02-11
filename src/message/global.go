@@ -2,21 +2,27 @@ package message
 
 func EmptyStaging(username string) string {
 	return "Nama stagingnya ndak ada, Kak @" + username + "\n" +
-		"Contoh : /status_staging staging_number1 staging_number2 staging_number3 atau /status_staging squad_name"
+		"Contoh : /status_staging staging_number1 staging_number2 staging_number3\n" +
+		"atau /status_staging squad_name"
 }
 
-func EmptyBookDoneStaging(username string) string {
+func EmptyBookDoneStaging(username, command string) string {
 	return "Nama stagingnya ndak ada, Kak @" + username + "\n" +
-		"Contoh : /booking staging_number atau /done staging_number"
+		"Contoh : " + command + " staging_number"
 }
 
 func StagingNotFound(staging string) string {
-	return "Staging<b>" + staging + "</b> tidak ditemukan, Kak"
+	return "staging<b>" + staging + ".vm</b> tidak ditemukan, Kak"
 }
 
-func EmptySquadStaging(username string) string {
+func EmptySquadStaging(username, command string) string {
 	return "Commandnya belum benar, Kak @" + username + "\n" +
-		"Contoh : /add_staging squad_name staging_number1 staging_number2 staging_number3"
+		"Contoh : " + command + " squad_name staging_number1 staging_number2 staging_number3"
+}
+
+func EmptyOncallUsername(username string) string {
+	return "Commandnya belum benar, Kak @" + username + "\n" +
+		"Contoh : /add_oncall @username1 @username2 @username3"
 }
 
 func HappyNewYear() string {

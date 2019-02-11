@@ -49,8 +49,13 @@ func main() {
 	bot.Send(greetingBotOwner, message.OnlineMessage(BotFullname), tb.ModeHTML)
 
 	bot.Handle(tb.OnText, func(m *tb.Message) {
-		var msg [6]string
+		var msg [7]string
 		var id [1]int
+
+		commandPrivate := []string{"/help", "/start", "/add_oncall"}
+		commandGroup := []string{"/status_staging", "/add_staging", "/update_staging", "/booking", "/done", "/add_oncall", "/oncall"}
+
+		baseCommand := regexp.MustCompile(helper.RegexCompileBaseCommand()).FindString(m.Text)
 
 		msg[0] = m.Text
 		msg[1] = m.Sender.Username
@@ -58,23 +63,20 @@ func main() {
 		msg[3] = m.Chat.LastName
 		msg[4] = m.Chat.Title
 		msg[5] = BotUsername
+		msg[6] = baseCommand
 		id[0] = m.Sender.ID
-
-		commandPrivate := []string{"/help", "/start", "/add_oncall"}
-		commandGroup := []string{"/status_staging", "/add_staging", "/update_staging", "/booking", "/done", "/add_oncall", "/oncall"}
-		baseCommand := regexp.MustCompile(helper.RegexCompileBaseCommand()).FindString(m.Text)
 
 		if !m.Private() {
 			for i := 0; i < len(commandGroup); i++ {
 				if baseCommand == commandGroup[i] {
-					bot.Send(m.Chat, group.SendMessage(msg[0], msg[1], msg[4], msg[5], id[0]), tb.ModeHTML)
+					bot.Send(m.Chat, group.SendMessage(msg[0], msg[1], msg[4], msg[5], msg[6], id[0]), tb.ModeHTML)
 					bot.Delete(m)
 				}
 			}
 		} else {
 			for i := 0; i < len(commandPrivate); i++ {
 				if baseCommand == commandPrivate[i] {
-					bot.Send(m.Sender, private.SendMessage(msg[0], msg[2], msg[3], msg[5], id[0]), tb.ModeHTML)
+					bot.Send(m.Sender, private.SendMessage(msg[0], msg[2], msg[3], msg[5], msg[6], id[0]), tb.ModeHTML)
 				}
 			}
 		}

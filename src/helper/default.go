@@ -7,7 +7,3 @@ import (
 func Help() string {
 	return message.DefaultHelp()
 }
-
-func Command() string {
-	return message.DefaultCommand()
-}

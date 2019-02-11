@@ -12,25 +12,25 @@ func AddStaging(staging string) {
 
 	db := DBConnection()
 	file := helper.CreateFile()
-	pattern := regexp.MustCompile(helper.RegexCompileStagingNumber())
-	stgNumber := pattern.FindAllString(staging, -1)
+	stgNumber := regexp.MustCompile(helper.RegexCompileStagingNumber()).FindAllString(staging, -1)
 	stgSquad := regexp.MustCompile(helper.RegexCompileStagingSquad()).FindString(staging)
 
 	defer file.Close()
 
-	for _, match := range stgNumber {
-		includeStaging, _ := helper.IncludeArray(match, stgArray)
+	for _, list := range stgNumber {
+		includeStaging, _ := helper.IncludeArray(list, stgArray)
+
 		if includeStaging == false {
-			_, err := db.Exec("INSERT INTO booking_staging VALUES ('" + match + "', 'book', '0', 'book', 'done', '" + stgSquad + "')")
+			_, err := db.Exec("INSERT INTO booking_staging VALUES ('" + list + "', 'book', '0', 'book', 'done', '" + stgSquad + "')")
 			helper.ErrorMessage(err)
 
 			if err != nil {
-				file.WriteString("\n- <b>staging" + match + ".vm</b> sudah terdaftar")
+				file.WriteString("\n- <b>staging" + list + ".vm</b> sudah terdaftar")
 			} else {
-				file.WriteString("\n- <b>staging" + match + ".vm</b> berhasil ditambahkan")
+				file.WriteString("\n- <b>staging" + list + ".vm</b> berhasil ditambahkan")
 			}
 
-			stgArray = append(stgArray, match)
+			stgArray = append(stgArray, list)
 		}
 	}
 }

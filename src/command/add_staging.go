@@ -27,9 +27,9 @@ func AddStaging() string {
 	db.AddStaging(strings.ToUpper(staging))
 
 	if staging != "" {
-		send_message = message.AddStaging(staging)
+		send_message = message.AddStaging(strings.Trim(staging, " "))
 	} else {
-		send_message = message.EmptySquadStaging(first_name)
+		send_message = message.EmptySquadStaging(first_name, base_command)
 	}
 
 	return send_message

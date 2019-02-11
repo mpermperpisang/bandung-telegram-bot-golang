@@ -9,25 +9,25 @@ import (
 )
 
 func StatusStaging(staging string) {
-	var stagingName, status, branch, username, user string
+	var stgName, status, branch, username, user string
 	var stgArray []string
 
 	db := DBConnection()
 	file := helper.CreateFile()
-	pattern := regexp.MustCompile(helper.RegexCompileStatusStaging())
-	stg := pattern.FindAllString(staging, -1)
+	stg := regexp.MustCompile(helper.RegexCompileStatusStaging()).FindAllString(staging, -1)
 
 	defer file.Close()
 
-	for _, match := range stg {
-		includeStaging, _ := helper.IncludeArray(match, stgArray)
+	for _, list := range stg {
+		includeStaging, _ := helper.IncludeArray(list, stgArray)
+
 		if includeStaging == false {
-			stgMatch := strings.Trim(match, " ")
-			rows, err := db.Query("SELECT book_staging, book_status, book_branch, book_name FROM booking_staging WHERE (book_staging='" + stgMatch + "' or book_squad='" + stgMatch + "')")
+			stgList := strings.Trim(list, " ")
+			rows, err := db.Query("SELECT book_staging, book_status, book_branch, book_name FROM booking_staging WHERE (book_staging='" + stgList + "' or book_squad='" + stgList + "')")
 			helper.ErrorMessage(err)
 
 			for rows.Next() {
-				err = rows.Scan(&stagingName, &status, &branch, &username)
+				err = rows.Scan(&stgName, &status, &branch, &username)
 				helper.ErrorMessage(err)
 
 				if status == "done" {
@@ -36,12 +36,12 @@ func StatusStaging(staging string) {
 					user = "@" + username
 				}
 
-				content := "<code>Staging" + stagingName + "</code> : <b>" + strings.ToUpper(status) + "</b>\n" + branch + "\n" + user + "\n\n"
+				content := "<code>Staging" + stgName + "</code> : <b>" + strings.ToUpper(status) + "</b>\n" + branch + "\n" + user + "\n\n"
 
 				file.WriteString(content)
 			}
 
-			stgArray = append(stgArray, match)
+			stgArray = append(stgArray, list)
 
 			err = rows.Err()
 			helper.ErrorMessage(err)

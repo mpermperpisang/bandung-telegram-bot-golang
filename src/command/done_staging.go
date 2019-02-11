@@ -27,9 +27,9 @@ func DoneStaging() string {
 	db.DoneStaging((strings.ToUpper(staging)), first_name, user_id)
 
 	if staging != "" {
-		send_message = message.DoneStaging(first_name, staging)
+		send_message = message.DoneStaging(first_name, strings.Trim(staging, " "))
 	} else {
-		send_message = message.EmptyBookDoneStaging(first_name)
+		send_message = message.EmptyBookDoneStaging(first_name, base_command)
 	}
 
 	return send_message

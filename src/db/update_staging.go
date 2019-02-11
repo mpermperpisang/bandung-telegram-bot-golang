@@ -12,21 +12,23 @@ func UpdateStaging(staging string) {
 
 	db := DBConnection()
 	file := helper.CreateFile()
-	pattern := regexp.MustCompile(helper.RegexCompileStagingNumber())
-	stgNumber := pattern.FindAllString(staging, -1)
+	stgNumber := regexp.MustCompile(helper.RegexCompileStagingNumber()).FindAllString(staging, -1)
 	stgSquad := regexp.MustCompile(helper.RegexCompileStagingSquad()).FindString(staging)
 
 	defer file.Close()
+
 	file.WriteString("<b>" + stgSquad + "</b>" + " :")
 
-	for _, match := range stgNumber {
-		includeStaging, _ := helper.IncludeArray(match, stgArray)
+	for _, list := range stgNumber {
+		includeStaging, _ := helper.IncludeArray(list, stgArray)
+
 		if includeStaging == false {
-			_, err := db.Exec("UPDATE booking_staging SET book_squad='" + stgSquad + "' where book_staging='" + match + "'")
+			_, err := db.Exec("UPDATE booking_staging SET book_squad='" + stgSquad + "' where book_staging='" + list + "'")
 			helper.ErrorMessage(err)
 
-			file.WriteString("\n- staging" + match + ".vm")
-			stgArray = append(stgArray, match)
+			file.WriteString("\n- staging" + list + ".vm")
+
+			stgArray = append(stgArray, list)
 		}
 	}
 }

@@ -27,7 +27,7 @@ func StatusStaging() string {
 	db.StatusStaging(strings.ToUpper(staging))
 
 	if staging != "" {
-		send_message = message.StagingStatus(staging)
+		send_message = message.StagingStatus(strings.Trim(staging, " "))
 	} else {
 		send_message = message.EmptyStaging(first_name)
 	}
