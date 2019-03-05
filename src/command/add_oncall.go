@@ -36,16 +36,16 @@ func AddOnCall() string {
 	t := time.Now()
 	year, _ := strconv.Atoi(t.Format("2006"))
 
-	oncall = helper.CheckEmptyBackEndOnCall(text_msg)
+	oncall = helper.CheckEmptyUsername(text_msg)
 
 	if oncall == "" {
-		send_message = message.EmptyOncallUsername(first_name)
+		send_message = message.EmptyUsername(first_name, base_command)
 	} else {
 
 		if sheet == nil {
 			send_message = message.EmptyTabSheet(strconv.Itoa(year))
 		} else {
-			pattern := regexp.MustCompile(helper.RegexCompileBackEndOnCall())
+			pattern := regexp.MustCompile(helper.RegexCompileUsername())
 			backend := pattern.FindAllString(text_msg, -1)
 
 			for row := 1; row <= 12; row++ {

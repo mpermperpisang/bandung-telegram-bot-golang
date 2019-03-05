@@ -35,3 +35,47 @@ func PrefixCommandOnCall() string {
 func PrefixCommandUpdateStaging() string {
 	return "/update_staging"
 }
+
+func PrefixCommandAddSnack() string {
+	return "/add_snack"
+}
+
+func PrefixCommandMoveSnack() string {
+	return "/move"
+}
+
+func PrefixCommandPermanentSnack() string {
+	return "/permanent"
+}
+
+func PrefixCommandDeleteSnack() string {
+	return "/delete"
+}
+
+func PrefixCommandDoneSnack() string {
+	return "/done"
+}
+
+func PrefixCommandCancelSnack() string {
+	return "/cancel"
+}
+
+func PrefixCommandHolidaySnack() string {
+	return "/holiday"
+}
+
+func PrefixCommandDearSnack() string {
+	return "/dear"
+}
+
+func PrefixCommandAddAdminSnack() string {
+	return "/add_admin"
+}
+
+func PrefixCommandDeleteAdminSnack() string {
+	return "/delete_admin"
+}
+
+func PrefixCommandListAdminSnack() string {
+	return "/list_admin"
+}

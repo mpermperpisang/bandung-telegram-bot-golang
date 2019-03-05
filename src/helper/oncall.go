@@ -6,9 +6,9 @@ import (
 
 var username string
 
-func CheckEmptyBackEndOnCall(text string) string {
-	pattern := regexp.MustCompile(RegexCompileBackEndOnCall())
-	staging = pattern.FindString(text)
+func CheckEmptyUsername(text string) string {
+	pattern := regexp.MustCompile(RegexCompileUsername())
+	username = pattern.FindString(text)
 
 	return username
 }

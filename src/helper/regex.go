@@ -20,10 +20,22 @@ func RegexCompileStagingSquad() string {
 	return `[a-zA-Z_]+`
 }
 
-func RegexCompileBackEndOnCall() string {
+func RegexCompileUsername() string {
 	return `\B@\S+`
 }
 
 func RegexCompileBaseCommand() string {
 	return `\/[a-z]\w+`
+}
+
+func RegexCompileCheckEmptyDayUsername() string {
+	return `\s[a-zA-Z@ ]+`
+}
+
+func RegexCompileSnackDay() string {
+	return `\s[a-zA-Z]{3}`
+}
+
+func RegexCompileSnackSchedule() string {
+	return `\s[a-zA-Z0-9]{0}[a-zA-Z0][^\s]+\s@[a-zA-Z0-9_^]+`
 }

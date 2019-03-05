@@ -25,6 +25,8 @@ func Help() string {
 	switch bot_name {
 	case os.Getenv("BOT_BOOKING"):
 		content = message.Booking()
+	case os.Getenv("BOT_SNACK"):
+		content = message.Snack()
 	default:
 		content = helper.Help()
 	}

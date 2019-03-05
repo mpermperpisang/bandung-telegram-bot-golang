@@ -1,8 +1,8 @@
 package message
 
-func EmptyStaging(username string) string {
+func EmptyStatusStaging(username, command string) string {
 	return "Nama stagingnya ndak ada, Kak @" + username + "\n" +
-		"Contoh : /status_staging staging_number1 staging_number2 staging_number3\n" +
+		"Contoh : " + command + " staging_number1 staging_number2 staging_number3 dan seterusnya\n" +
 		"atau /status_staging squad_name"
 }
 
@@ -17,16 +17,15 @@ func StagingNotFound(staging string) string {
 
 func EmptySquadStaging(username, command string) string {
 	return "Commandnya belum benar, Kak @" + username + "\n" +
-		"Contoh : " + command + " squad_name staging_number1 staging_number2 staging_number3"
+		"Contoh : " + command + " squad_name staging_number1 staging_number2 staging_number3 dan seterusnya"
 }
 
-func EmptyOncallUsername(username string) string {
+func EmptyDayUsername(username, command string) string {
 	return "Commandnya belum benar, Kak @" + username + "\n" +
-		"Contoh : /add_oncall @username1 @username2 @username3"
+		"Contoh : " + command + "day1 @username @day2 @username @day3 @username dan seterusnya"
 }
 
-func HappyNewYear() string {
-	return "Selamat Tahun Baru, Kakak-kakak\n" +
-		"Mau ngingetin nih, jadwal BE oncallnya tolong diperbarui yaa\n" +
-		"Happy holiday 🥳🎉"
+func EmptyUsername(username, command string) string {
+	return "Commandnya belum benar, Kak @" + username + "\n" +
+		"Contoh : " + command + " @username1 @username2 @username3 dan seterusnya"
 }

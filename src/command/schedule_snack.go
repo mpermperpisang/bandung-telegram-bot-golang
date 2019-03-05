@@ -7,11 +7,11 @@ import (
 	"strings"
 )
 
-func MatchStatusStaging() string {
+func MatchScheduleSnack() string {
 	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandStatusStaging())
 
 	if pattern == true {
-		GoToFunc = StatusStaging
+		GoToFunc = ScheduleSnack
 	} else {
 		return send_message
 	}
@@ -19,7 +19,7 @@ func MatchStatusStaging() string {
 	return GoToFunc()
 }
 
-func StatusStaging() string {
+func ScheduleSnack() string {
 	var staging string
 
 	staging = helper.CheckEmptyStaging(text_msg)

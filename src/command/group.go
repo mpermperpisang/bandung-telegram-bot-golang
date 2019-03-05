@@ -1,6 +1,12 @@
 package command
 
 func Group() {
+	GBooking()
+	GSnack()
+}
+
+func GBooking() {
+	// List command group untuk bot Booking
 	MatchStatusStaging()
 	MatchAddStaging()
 	MatchUpdateStaging()
@@ -8,4 +14,18 @@ func Group() {
 	MatchDoneStaging()
 	MatchAddOnCall()
 	MatchOnCall()
+}
+
+func GSnack() {
+	// List command group untuk bot Snack
+	MatchAddSnack()
+	MatchMoveSnack()
+	MatchPermanentSnack()
+	MatchDeleteSnack()
+	MatchCancelSnack()
+	MatchHolidaySnack()
+	MatchAddAdminSnack()
+	MatchDeleteAdminSnack()
+	MatchListAdminSnack()
+	MatchScheduleSnack()
 }

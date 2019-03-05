@@ -23,7 +23,7 @@ func UpdateStaging(staging string) {
 		includeStaging, _ := helper.IncludeArray(list, stgArray)
 
 		if includeStaging == false {
-			_, err := db.Exec("UPDATE booking_staging SET book_squad='" + stgSquad + "' where book_staging='" + list + "'")
+			_, err := db.Exec("UPDATE booking_staging SET book_squad='" + stgSquad + "' WHERE book_staging='" + list + "'")
 			helper.ErrorMessage(err)
 
 			file.WriteString("\n- staging" + list + ".vm")
