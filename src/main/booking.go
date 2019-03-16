@@ -65,10 +65,9 @@ func main() {
 		commandBot := []string{"/help", "/start", "/status_staging", "/add_staging", "/update_staging", "/book_staging", "/done_staging", "/add_oncall", "/oncall"}
 		baseCommand := regexp.MustCompile(helper.RegexCompileBaseCommand()).FindString(m.Text)
 
-		command.Actions(bot, m, UsernameBooking, baseCommand, postToGroup)
-
 		for i := 0; i < len(commandBot); i++ {
 			if baseCommand == commandBot[i] {
+				command.Actions(bot, m, UsernameBooking, baseCommand, postToGroup)
 			}
 		}
 
