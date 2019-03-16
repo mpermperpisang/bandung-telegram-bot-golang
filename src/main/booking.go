@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/bandung-telegram-bot-golang/src/command"
-
 	"github.com/bandung-telegram-bot-golang/src/helper"
 	"github.com/bandung-telegram-bot-golang/src/message"
 	"github.com/joho/godotenv"
