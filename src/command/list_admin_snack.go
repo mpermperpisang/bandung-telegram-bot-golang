@@ -1,19 +1,20 @@
 package command
 
 import (
-	"db"
-	"helper"
-	"message"
 	"strings"
+
+	"github.com/bandung-telegram-bot-golang/src/db"
+	"github.com/bandung-telegram-bot-golang/src/helper"
+	"github.com/bandung-telegram-bot-golang/src/message"
 )
 
 func MatchListAdminSnack() string {
-	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandListAdminSnack())
+	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandListAdminSnack())
 
 	if pattern == true {
 		GoToFunc = ListAdminSnack
 	} else {
-		return send_message
+		return contentMessage
 	}
 
 	return GoToFunc()
@@ -22,7 +23,8 @@ func MatchListAdminSnack() string {
 func ListAdminSnack() string {
 	db.ListAdminSnack()
 
-	send_message = message.ListAdminSnack(user_name)
+	contentMessage = message.ListAdminSnack(userName)
+	sendTo = sendToGroup
 
-	return send_message
+	return "success"
 }

@@ -5,7 +5,7 @@ func OnCall(backend string) string {
 }
 
 func AddOnCall(year string) string {
-	return "Berhasil mengupdate data BE oncall untuk tahun " + year
+	return "Berhasil mengacak data BE oncall untuk tahun " + year
 }
 
 func HolidayOnCall() string {

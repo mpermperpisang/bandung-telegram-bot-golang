@@ -1,20 +1,21 @@
 package command
 
 import (
-	"db"
-	"helper"
-	"message"
 	"strings"
-	"user"
+
+	"github.com/bandung-telegram-bot-golang/src/db"
+	"github.com/bandung-telegram-bot-golang/src/helper"
+	"github.com/bandung-telegram-bot-golang/src/message"
+	"github.com/bandung-telegram-bot-golang/src/user"
 )
 
 func MatchCancelSnack() string {
-	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandCancelSnack())
+	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandCancelSnack())
 
 	if pattern == true {
 		GoToFunc = CancelSnack
 	} else {
-		return send_message
+		return "not match"
 	}
 
 	return GoToFunc()
@@ -24,18 +25,24 @@ func CancelSnack() string {
 	var admin bool
 	var snack string
 
-	admin = user.IsAdmin(first_name)
-	snack = helper.CheckEmptyUsername(text_msg)
+	admin = user.IsAdmin(firstName)
+	snack = helper.CheckEmptyUsername(textMsg)
 
 	if admin {
-		db.CancelSnack(text_msg)
+		db.CancelSnack(textMsg)
 	}
 
 	if snack != "" {
-		send_message = message.CancelSnack(snack, first_name)
+		contentMessage = message.CancelSnack(snack, firstName)
 	} else {
-		send_message = message.EmptyUsername(first_name, base_command)
+		contentMessage = message.EmptyUsername(userName, baseCommand)
 	}
 
-	return send_message
+	if strings.Contains(contentMessage, "dibatalin") {
+		sendTo = sendToGroup
+	} else {
+		sendTo = sendToPrivate
+	}
+
+	return "success"
 }

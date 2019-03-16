@@ -1,28 +1,29 @@
 package command
 
 import (
-	"helper"
 	"math/rand"
-	"message"
 	"os"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/bandung-telegram-bot-golang/src/helper"
+	"github.com/bandung-telegram-bot-golang/src/message"
 )
 
 func MatchAddOnCall() string {
-	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandAddOnCall())
+	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandAddOnCall())
 
 	if pattern == true {
 		admin := []string{os.Getenv("ADMIN1"), os.Getenv("ADMIN2"), os.Getenv("ADMIN3"), os.Getenv("ADMIN4")}
-		includeAdmin, _ := helper.IncludeArray(first_name, admin)
+		includeAdmin, _ := helper.IncludeArray(firstName, admin)
 
 		if includeAdmin == true {
 			GoToFunc = AddOnCall
 		}
 	} else {
-		return send_message
+		return "not match"
 	}
 
 	return GoToFunc()
@@ -31,22 +32,20 @@ func MatchAddOnCall() string {
 func AddOnCall() string {
 	var content, oncall string
 	var column = -1
-	var sheet = helper.GoogleSheet()
+	var sheet = helper.GoogleSheet(os.Getenv("SPREADSHEET_ONCALL"))
 
 	t := time.Now()
 	year, _ := strconv.Atoi(t.Format("2006"))
-
-	oncall = helper.CheckEmptyUsername(text_msg)
+	oncall = helper.CheckEmptyUsername(textMsg)
 
 	if oncall == "" {
-		send_message = message.EmptyUsername(first_name, base_command)
+		contentMessage = message.EmptyUsername(userName, baseCommand)
 	} else {
-
 		if sheet == nil {
-			send_message = message.EmptyTabSheet(strconv.Itoa(year))
+			contentMessage = message.EmptyTabSheet(strconv.Itoa(year))
 		} else {
 			pattern := regexp.MustCompile(helper.RegexCompileUsername())
-			backend := pattern.FindAllString(text_msg, -1)
+			backend := pattern.FindAllString(textMsg, -1)
 
 			for row := 1; row <= 12; row++ {
 				lastday := time.Date(year, time.Month(row+1), 0, 0, 0, 0, 0, time.UTC)
@@ -86,9 +85,15 @@ func AddOnCall() string {
 			err := sheet.Synchronize()
 			helper.ErrorMessage(err)
 
-			send_message = message.AddOnCall(t.Format("2006"))
+			contentMessage = message.AddOnCall(t.Format("2006"))
 		}
 	}
 
-	return send_message
+	if strings.Contains(contentMessage, "Berhasil") {
+		sendTo = sendToGroup
+	} else {
+		sendTo = sendToPrivate
+	}
+
+	return "success"
 }

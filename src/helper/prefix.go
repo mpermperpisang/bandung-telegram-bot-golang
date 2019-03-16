@@ -17,11 +17,7 @@ func PrefixCommandAddStaging() string {
 }
 
 func PrefixCommandBookStaging() string {
-	return "/booking"
-}
-
-func PrefixCommandDoneStaging() string {
-	return "/done"
+	return "/book_staging"
 }
 
 func PrefixCommandAddOnCall() string {
@@ -56,6 +52,10 @@ func PrefixCommandDoneSnack() string {
 	return "/done"
 }
 
+func PrefixCommandDoneStaging() string {
+	return "/done_staging"
+}
+
 func PrefixCommandCancelSnack() string {
 	return "/cancel"
 }
@@ -78,4 +78,8 @@ func PrefixCommandDeleteAdminSnack() string {
 
 func PrefixCommandListAdminSnack() string {
 	return "/list_admin"
+}
+
+func PrefixCommandPlatNumber() string {
+	return "/plat"
 }

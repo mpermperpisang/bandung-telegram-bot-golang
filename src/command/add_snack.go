@@ -1,20 +1,21 @@
 package command
 
 import (
-	"db"
-	"helper"
-	"message"
 	"strings"
-	"user"
+
+	"github.com/bandung-telegram-bot-golang/src/db"
+	"github.com/bandung-telegram-bot-golang/src/helper"
+	"github.com/bandung-telegram-bot-golang/src/message"
+	"github.com/bandung-telegram-bot-golang/src/user"
 )
 
 func MatchAddSnack() string {
-	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandAddSnack())
+	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandAddSnack())
 
 	if pattern == true {
 		GoToFunc = AddSnack
 	} else {
-		return send_message
+		return "not match"
 	}
 
 	return GoToFunc()
@@ -24,18 +25,24 @@ func AddSnack() string {
 	var admin bool
 	var snack string
 
-	admin = user.IsAdmin(user_name)
-	snack = helper.CheckEmptyDayUsername(text_msg)
+	admin = user.IsAdmin(userName)
+	snack = helper.CheckEmptyDayUsername(textMsg)
 
 	if admin {
 		db.AddSnack(snack)
 	}
 
 	if snack != "" {
-		send_message = message.AddSnack(snack, user_name)
+		contentMessage = message.AddSnack(snack, userName)
 	} else {
-		send_message = message.EmptyDayUsername(user_name, base_command)
+		contentMessage = message.EmptyDayUsername(userName, baseCommand)
 	}
 
-	return send_message
+	if strings.Contains(contentMessage, "Cihuy") {
+		sendTo = sendToGroup
+	} else {
+		sendTo = sendToPrivate
+	}
+
+	return "success"
 }

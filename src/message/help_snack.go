@@ -33,17 +33,14 @@ func Snack() string {
 		"or\n" +
 		"<b>/holiday@" + botName + " @username1 @username2 @username3</b>\n\n" +
 
-		"8. Send dear all message to all of Bukalapak.bdg member (GROUP)\n" +
-		"<b>/dear_all@" + botName + "</b>\n\n" +
-
-		"9. Add admin snack (GROUP)\n" +
+		"8. Add admin snack (GROUP)\n" +
 		"<b>/add_admin@" + botName + " @username1 @username2 @username3</b>\n\n" +
+
+		"9. Delete admin snack (GROUP)\n" +
+		"<b>/delete_admin@" + botName + " @username1 @username2 @username3</b>\n\n" +
 
 		"10. See the list of admin snack (PRIVATE)\n" +
 		"<b>/list_admin@" + botName + "</b>\n\n" +
-
-		"11. See list of snack schedule (PRIVATE)\n" +
-		"<b>/schedule@" + botName + "</b>\n\n" +
 
 		"🐾 Only admin/managers can do add, edit, change, " +
 		"delete & holiday 😎"

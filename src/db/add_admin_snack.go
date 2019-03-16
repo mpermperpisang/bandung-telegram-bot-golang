@@ -1,10 +1,9 @@
 package db
 
 import (
-	"helper"
 	"regexp"
 
-	_ "github.com/go-sql-driver/mysql"
+	"github.com/bandung-telegram-bot-golang/src/helper"
 )
 
 func AddAdminSnack(username string) {

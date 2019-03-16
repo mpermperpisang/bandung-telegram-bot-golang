@@ -1,19 +1,20 @@
 package command
 
 import (
-	"helper"
-	"message"
 	"os"
 	"strings"
+
+	"github.com/bandung-telegram-bot-golang/src/helper"
+	"github.com/bandung-telegram-bot-golang/src/message"
 )
 
 func MatchHelp() string {
-	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandHelp())
+	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandHelp())
 
 	if pattern == true {
 		GoToFunc = Help
 	} else {
-		return send_message
+		return "failed"
 	}
 
 	return GoToFunc()
@@ -22,7 +23,7 @@ func MatchHelp() string {
 func Help() string {
 	var content string
 
-	switch bot_name {
+	switch botName {
 	case os.Getenv("BOT_BOOKING"):
 		content = message.Booking()
 	case os.Getenv("BOT_SNACK"):
@@ -31,7 +32,8 @@ func Help() string {
 		content = helper.Help()
 	}
 
-	send_message = message.Header() + content + message.Footer()
+	contentMessage = message.Header() + content + message.Footer()
+	sendTo = sendToPrivate
 
-	return send_message
+	return "success"
 }

@@ -1,25 +1,27 @@
 package command
 
 import (
-	"helper"
-	"message"
 	"strings"
+
+	"github.com/bandung-telegram-bot-golang/src/helper"
+	"github.com/bandung-telegram-bot-golang/src/message"
 )
 
 func MatchStart() string {
-	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandStart())
+	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandStart())
 
 	if pattern == true {
 		GoToFunc = Start
 	} else {
-		return send_message
+		return "failed"
 	}
 
 	return GoToFunc()
 }
 
 func Start() string {
-	send_message = message.Start(first_name, last_name)
+	contentMessage = message.Start(firstName, lastName)
+	sendTo = sendToPrivate
 
-	return send_message
+	return "success"
 }

@@ -2,11 +2,11 @@ package db
 
 import (
 	"database/sql"
-	"helper"
 	"regexp"
 	"strconv"
 	"strings"
 
+	"github.com/bandung-telegram-bot-golang/src/helper"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -25,7 +25,7 @@ func BookStaging(staging, first_name string, user_id int) {
 	helper.ErrorMessage(err)
 
 	if err != nil || row == sql.ErrNoRows {
-		file.WriteString("staging yang belum ditambahkan ke daftar\nContoh : /add_staging squad_name staging_number1 staging_number2 staging_number3")
+		file.WriteString("staging yang belum ditambahkan ke daftar\nContoh : <code>/add_staging squad_name staging_number1 staging_number2 staging_number3</code> dan seterusnya")
 	} else {
 		file.WriteString("staging" + stgList + ".vm\nTolong yang lain jangan ada yang otak-atik yaa")
 	}

@@ -1,19 +1,20 @@
 package command
 
 import (
-	"db"
-	"helper"
-	"message"
 	"strings"
+
+	"github.com/bandung-telegram-bot-golang/src/db"
+	"github.com/bandung-telegram-bot-golang/src/helper"
+	"github.com/bandung-telegram-bot-golang/src/message"
 )
 
 func MatchStatusStaging() string {
-	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandStatusStaging())
+	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandStatusStaging())
 
 	if pattern == true {
 		GoToFunc = StatusStaging
 	} else {
-		return send_message
+		return "not match"
 	}
 
 	return GoToFunc()
@@ -22,15 +23,21 @@ func MatchStatusStaging() string {
 func StatusStaging() string {
 	var staging string
 
-	staging = helper.CheckEmptyStaging(text_msg)
+	staging = helper.CheckEmptyStaging(textMsg)
 
 	db.StatusStaging(strings.ToUpper(staging))
 
 	if staging != "" {
-		send_message = message.StagingStatus(strings.Trim(staging, " "))
+		contentMessage = message.StagingStatus(strings.Trim(staging, " "))
 	} else {
-		send_message = message.EmptyStatusStaging(first_name, base_command)
+		contentMessage = message.EmptyStatusStaging(userName, baseCommand)
 	}
 
-	return send_message
+	if strings.Contains(contentMessage, "Status") {
+		sendTo = sendToGroup
+	} else {
+		sendTo = sendToPrivate
+	}
+
+	return "success"
 }

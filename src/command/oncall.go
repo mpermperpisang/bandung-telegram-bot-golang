@@ -1,20 +1,22 @@
 package command
 
 import (
-	"helper"
-	"message"
+	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/bandung-telegram-bot-golang/src/helper"
+	"github.com/bandung-telegram-bot-golang/src/message"
 )
 
 func MatchOnCall() string {
-	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandOnCall())
+	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandOnCall())
 
 	if pattern == true {
 		GoToFunc = OnCall
 	} else {
-		return send_message
+		return "not match"
 	}
 
 	return GoToFunc()
@@ -22,7 +24,7 @@ func MatchOnCall() string {
 
 func OnCall() string {
 	var imonth, idate int
-	var sheet = helper.GoogleSheet()
+	var sheet = helper.GoogleSheet(os.Getenv("SPREADSHEET_ONCALL"))
 
 	t := time.Now()
 	month, _ := strconv.Atoi(t.Format("01"))
@@ -30,18 +32,24 @@ func OnCall() string {
 	year, _ := strconv.Atoi(t.Format("2006"))
 
 	if sheet == nil || sheet.Columns[imonth][idate].Value == "" {
-		send_message = message.EmptyOnCall(strconv.Itoa(year))
+		contentMessage = message.EmptyOnCall(strconv.Itoa(year))
 	} else {
 		imonth = int(month) - 1
 		idate = int(date) - 1
 		contentsheet := sheet.Columns[imonth][idate].Value
 
 		if contentsheet == "" {
-			send_message = message.HolidayOnCall()
+			contentMessage = message.HolidayOnCall()
 		} else {
-			send_message = message.OnCall(sheet.Columns[imonth][idate].Value)
+			contentMessage = message.OnCall(sheet.Columns[imonth][idate].Value)
 		}
 	}
 
-	return send_message
+	if strings.Contains(contentMessage, "Semangat") {
+		sendTo = sendToGroup
+	} else {
+		sendTo = sendToPrivate
+	}
+
+	return "success"
 }

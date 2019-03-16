@@ -118,7 +118,7 @@ func AddAdminSnack(snack, username string) string {
 	data, _ := ioutil.ReadFile("temp.go")
 	content := string(data)
 
-	if strings.Contains(content, "admin snack") {
+	if strings.Contains(content, "resmi") {
 		header = "Cihuy Kak @" + username + " nambahin admin snack 🎉👏🏻🥳\n"
 	} else {
 		header = "Kok didaftarin lagi sih, Kak @" + username + "? 😵\n"

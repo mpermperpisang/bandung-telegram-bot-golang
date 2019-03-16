@@ -1,7 +1,7 @@
 package user
 
 import (
-	"db"
+	"github.com/bandung-telegram-bot-golang/src/db"
 )
 
 func IsAdmin(username string) bool {

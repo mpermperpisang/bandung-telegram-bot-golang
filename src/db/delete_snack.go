@@ -2,9 +2,9 @@ package db
 
 import (
 	"database/sql"
-	"helper"
 	"regexp"
 
+	"github.com/bandung-telegram-bot-golang/src/helper"
 	_ "github.com/go-sql-driver/mysql"
 )
 

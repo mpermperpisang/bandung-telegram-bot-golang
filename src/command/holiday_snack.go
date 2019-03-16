@@ -1,20 +1,21 @@
 package command
 
 import (
-	"db"
-	"helper"
-	"message"
 	"strings"
-	"user"
+
+	"github.com/bandung-telegram-bot-golang/src/db"
+	"github.com/bandung-telegram-bot-golang/src/helper"
+	"github.com/bandung-telegram-bot-golang/src/message"
+	"github.com/bandung-telegram-bot-golang/src/user"
 )
 
 func MatchHolidaySnack() string {
-	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandHolidaySnack())
+	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandHolidaySnack())
 
 	if pattern == true {
 		GoToFunc = HolidaySnack
 	} else {
-		return send_message
+		return "not match"
 	}
 
 	return GoToFunc()
@@ -24,18 +25,24 @@ func HolidaySnack() string {
 	var admin bool
 	var snack string
 
-	admin = user.IsAdmin(user_name)
-	snack = helper.CheckEmptyUsername(text_msg)
+	admin = user.IsAdmin(userName)
+	snack = helper.CheckEmptyUsername(textMsg)
 
 	if admin {
-		db.HolidaySnack(text_msg)
+		db.HolidaySnack(textMsg)
 	}
 
 	if snack != "" {
-		send_message = message.HolidaySnack(snack, user_name)
+		contentMessage = message.HolidaySnack(snack, userName)
 	} else {
-		send_message = message.EmptyUsername(user_name, base_command)
+		contentMessage = message.EmptyUsername(userName, baseCommand)
 	}
 
-	return send_message
+	if strings.Contains(contentMessage, "diliburin") {
+		sendTo = sendToGroup
+	} else {
+		sendTo = sendToPrivate
+	}
+
+	return "success"
 }

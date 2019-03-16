@@ -1,31 +1,33 @@
 package message
 
+import "strings"
+
 func EmptyStatusStaging(username, command string) string {
 	return "Nama stagingnya ndak ada, Kak @" + username + "\n" +
-		"Contoh : " + command + " staging_number1 staging_number2 staging_number3 dan seterusnya\n" +
+		"Contoh : <code>" + command + " staging_number1 staging_number2 staging_number3</code> dan seterusnya\n" +
 		"atau /status_staging squad_name"
 }
 
 func EmptyBookDoneStaging(username, command string) string {
 	return "Nama stagingnya ndak ada, Kak @" + username + "\n" +
-		"Contoh : " + command + " staging_number"
+		"Contoh : <code>" + command + " staging_number</code>"
 }
 
 func StagingNotFound(staging string) string {
-	return "staging<b>" + staging + ".vm</b> tidak ditemukan, Kak"
+	return "Staging <b>" + strings.ToUpper(staging) + "</b> tidak ditemukan, Kak"
 }
 
 func EmptySquadStaging(username, command string) string {
 	return "Commandnya belum benar, Kak @" + username + "\n" +
-		"Contoh : " + command + " squad_name staging_number1 staging_number2 staging_number3 dan seterusnya"
+		"Contoh : <code>" + command + " squad_name staging_number1 staging_number2 staging_number3</code> dan seterusnya"
 }
 
 func EmptyDayUsername(username, command string) string {
 	return "Commandnya belum benar, Kak @" + username + "\n" +
-		"Contoh : " + command + "day1 @username @day2 @username @day3 @username dan seterusnya"
+		"Contoh : <code>" + command + "day1 @username @day2 @username @day3 @username</code> dan seterusnya"
 }
 
 func EmptyUsername(username, command string) string {
 	return "Commandnya belum benar, Kak @" + username + "\n" +
-		"Contoh : " + command + " @username1 @username2 @username3 dan seterusnya"
+		"Contoh : <code>" + command + " @username1 @username2 @username3</code> dan seterusnya"
 }

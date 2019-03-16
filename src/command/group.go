@@ -27,5 +27,4 @@ func GSnack() {
 	MatchAddAdminSnack()
 	MatchDeleteAdminSnack()
 	MatchListAdminSnack()
-	MatchScheduleSnack()
 }

@@ -1,28 +1,34 @@
 package command
 
 import (
-	"db"
-	"helper"
-	"message"
 	"strings"
+
+	"github.com/bandung-telegram-bot-golang/src/db"
+	"github.com/bandung-telegram-bot-golang/src/helper"
+	"github.com/bandung-telegram-bot-golang/src/message"
 )
 
 func MatchDoneSnack() string {
-	pattern := strings.HasPrefix(text_msg, helper.PrefixCommandDoneSnack())
+	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandDoneSnack())
 
 	if pattern == true {
 		GoToFunc = DoneSnack
 	} else {
-		return send_message
+		return "not match"
 	}
 
 	return GoToFunc()
 }
 
 func DoneSnack() string {
-	db.DoneSnack(user_name, user_id)
+	db.DoneSnack(userName, userID)
 
-	send_message = message.DoneSnack(user_name, first_name)
+	contentMessage = message.DoneSnack(userName, firstName)
+	if strings.Contains(contentMessage, "Yeay") {
+		sendTo = sendToGroup
+	} else {
+		sendTo = sendToPrivate
+	}
 
-	return send_message
+	return "success"
 }

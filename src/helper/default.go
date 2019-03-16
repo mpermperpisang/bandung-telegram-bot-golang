@@ -1,7 +1,7 @@
 package helper
 
 import (
-	"message"
+	"github.com/bandung-telegram-bot-golang/src/message"
 )
 
 func Help() string {
