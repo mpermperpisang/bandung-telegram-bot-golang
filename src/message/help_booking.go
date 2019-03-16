@@ -14,10 +14,10 @@ func Booking() string {
 		"<b>/update_staging@" + botName + " squad_name staging_number1 staging_number2 staging_number3</b>\n\n" +
 
 		"3. Booking staging for hard code, deploy or testing (BOTH)\n" +
-		"<b>/booking@" + botName + " staging_number</b>\n\n" +
+		"<b>/book_staging@" + botName + " staging_number</b>\n\n" +
 
 		"4. Done using staging (BOTH)\n" +
-		"<b>/done@" + botName + " staging_number</b>\n\n" +
+		"<b>/done_staging@" + botName + " staging_number</b>\n\n" +
 
 		"5. See staging book status (BOTH)\n" +
 		"<b>/status_staging@" + botName + " staging_number1 staging_number2 staging_number3</b>\n" +
