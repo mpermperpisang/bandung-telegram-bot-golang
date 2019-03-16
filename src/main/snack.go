@@ -41,12 +41,12 @@ func init() {
 	env := godotenv.Load()
 	helper.ErrorMessage(env)
 
-	//env untuk bot snack
+	// env untuk bot snack
 	TokenSnack = os.Getenv("TOKEN_SNACK")
 	UsernameSnack = os.Getenv("BOT_SNACK")
 	FullnameSnack = os.Getenv("NAME_SNACK")
 	ChatIDSnack = os.Getenv("ID_SNACK")
-	//env untuk id bot owner
+	// env untuk id bot owner
 	PrivateIDSnack = os.Getenv("ID_PRIVATE")
 }
 
@@ -64,7 +64,7 @@ func main() {
 
 	bot.Handle(tb.OnText, func(m *tb.Message) {
 		commandPrivate := []string{"/help", "/start", "/done"}
-		commandGroup := []string{"/add_snack", "/move", "/permanent", "/delete", "/cancel", "/holiday", "/add_admin", "/delete_admin", "/list_admin", "/plat"}
+		commandGroup := []string{"/add_snack", "/move", "/permanent", "/delete", "/cancel", "/holiday", "/add_admin", "/delete_admin", "/list_admin"}
 
 		baseCommand := regexp.MustCompile(helper.RegexCompileBaseCommand()).FindString(m.Text)
 		spammer := user.IsSpammer(m.Sender.Username, baseCommand)

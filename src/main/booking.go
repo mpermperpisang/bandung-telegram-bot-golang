@@ -40,12 +40,12 @@ func init() {
 	env := godotenv.Load()
 	helper.ErrorMessage(env)
 
-	//env untuk bot booking
+	// env untuk bot booking
 	TokenBooking = os.Getenv("TOKEN_BOOKING")
 	UsernameBooking = os.Getenv("BOT_BOOKING")
 	FullnameBooking = os.Getenv("NAME_BOOKING")
 	ChatIDBooking = os.Getenv("ID_BOOKING")
-	//env untuk id bot owner
+	// env untuk id bot owner
 	PrivateIDBooking = os.Getenv("ID_PRIVATE")
 }
 
