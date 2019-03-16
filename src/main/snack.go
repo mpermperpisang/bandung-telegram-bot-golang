@@ -60,7 +60,7 @@ func main() {
 	helper.ErrorMessage(err)
 
 	bot.Send(greetingBotOwner, message.OnlineMessage(FullnameSnack), tb.ModeHTML)
-	bot.Send(postToGroup, message.OnlineMessage(FullnameSnack), tb.ModeHTML)
+	// bot.Send(postToGroup, message.OnlineMessage(FullnameSnack), tb.ModeHTML)
 
 	bot.Handle(tb.OnText, func(m *tb.Message) {
 		commandPrivate := []string{"/help", "/start", "/done"}
