@@ -34,7 +34,7 @@ func AddStaging() string {
 	}
 
 	if strings.Contains(contentMessage, "Status :") {
-		sendTo = sendToGroup
+		sendTo = msg.Chat
 	} else {
 		sendTo = sendToPrivate
 	}

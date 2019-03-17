@@ -34,7 +34,7 @@ func BookStaging() string {
 	}
 
 	if strings.Contains(contentMessage, "memesan") {
-		sendTo = sendToGroup
+		sendTo = msg.Chat
 	} else {
 		sendTo = sendToPrivate
 	}

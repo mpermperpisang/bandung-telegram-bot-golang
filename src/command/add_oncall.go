@@ -90,7 +90,7 @@ func AddOnCall() string {
 	}
 
 	if strings.Contains(contentMessage, "Berhasil") {
-		sendTo = sendToGroup
+		sendTo = msg.Chat
 	} else {
 		sendTo = sendToPrivate
 	}

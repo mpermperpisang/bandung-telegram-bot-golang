@@ -34,7 +34,7 @@ func DoneStaging() string {
 	}
 
 	if strings.Contains(contentMessage, "selesai") {
-		sendTo = sendToGroup
+		sendTo = msg.Chat
 	} else {
 		sendTo = sendToPrivate
 	}

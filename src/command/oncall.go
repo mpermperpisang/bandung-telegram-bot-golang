@@ -46,7 +46,7 @@ func OnCall() string {
 	}
 
 	if strings.Contains(contentMessage, "Semangat") {
-		sendTo = sendToGroup
+		sendTo = msg.Chat
 	} else {
 		sendTo = sendToPrivate
 	}
