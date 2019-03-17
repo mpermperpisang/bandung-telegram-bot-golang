@@ -63,15 +63,24 @@ func main() {
 
 	bot.Handle(tb.OnText, func(m *tb.Message) {
 		commandBot := []string{"/help", "/start", "/status_staging", "/add_staging", "/update_staging", "/book_staging", "/done_staging", "/add_oncall", "/oncall"}
+		commandGroup := []string{"/status_staging", "/add_staging", "/update_staging", "/book_staging", "/done_staging", "/add_oncall", "/oncall"}
 		baseCommand := regexp.MustCompile(helper.RegexCompileBaseCommand()).FindString(m.Text)
 
 		for i := 0; i < len(commandBot); i++ {
-			if baseCommand == commandBot[i] {
-				command.Actions(bot, m, UsernameBooking, baseCommand, postToGroup)
+			if !m.Private() {
+				if baseCommand == commandGroup[i] {
+					command.Actions(bot, m, UsernameBooking, baseCommand, postToGroup)
+				}
+
+				if baseCommand == commandBot[i] {
+					bot.Delete(m)
+				}
+			} else {
+				if baseCommand == commandBot[i] {
+					command.Actions(bot, m, UsernameBooking, baseCommand, postToGroup)
+				}
 			}
 		}
-
-		bot.Delete(m)
 	})
 
 	bot.Start()

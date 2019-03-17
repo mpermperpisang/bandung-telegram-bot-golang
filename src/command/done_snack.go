@@ -24,6 +24,7 @@ func DoneSnack() string {
 	db.DoneSnack(userName, userID)
 
 	contentMessage = message.DoneSnack(userName, firstName)
+
 	if strings.Contains(contentMessage, "Yeay") {
 		sendTo = sendToGroup
 	} else {

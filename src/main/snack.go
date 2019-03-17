@@ -63,33 +63,32 @@ func main() {
 	// bot.Send(postToGroup, message.OnlineMessage(FullnameSnack), tb.ModeHTML)
 
 	bot.Handle(tb.OnText, func(m *tb.Message) {
-		commandPrivate := []string{"/help", "/start", "/done"}
+		commandBot := []string{"/help", "/start", "/done", "/add_snack", "/move", "/permanent", "/delete", "/cancel", "/holiday", "/add_admin", "/delete_admin", "/list_admin"}
 		commandGroup := []string{"/add_snack", "/move", "/permanent", "/delete", "/cancel", "/holiday", "/add_admin", "/delete_admin", "/list_admin"}
-
 		baseCommand := regexp.MustCompile(helper.RegexCompileBaseCommand()).FindString(m.Text)
 		spammer := user.IsSpammer(m.Sender.Username, baseCommand)
 
-		if !m.Private() {
-			for i := 0; i < len(commandGroup); i++ {
+		for i := 0; i < len(commandBot); i++ {
+			if !m.Private() {
 				if baseCommand == commandGroup[i] {
 					if spammer {
-						bot.Send(m.Chat, message.UserSpammer(m.Sender.Username), tb.ModeHTML)
+						bot.Send(m.Sender, message.UserSpammer(m.Sender.Username), tb.ModeHTML)
 					} else {
 						command.Actions(bot, m, UsernameSnack, baseCommand, postToGroup)
 					}
 
 					user.SaveSpammer(m.Sender.Username, baseCommand)
 				}
-			}
-		} else {
-			for i := 0; i < len(commandPrivate); i++ {
-				if baseCommand == commandPrivate[i] {
+
+				if baseCommand == commandBot[i] {
+					bot.Delete(m)
+				}
+			} else {
+				if baseCommand == commandBot[i] {
 					command.Actions(bot, m, UsernameSnack, baseCommand, postToGroup)
 				}
 			}
 		}
-
-		bot.Delete(m)
 	})
 
 	bot.Start()
