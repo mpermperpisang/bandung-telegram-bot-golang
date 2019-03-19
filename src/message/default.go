@@ -13,3 +13,8 @@ func UserSpammer(name string) string {
 	return "Kak @" + name + " udah terlalu banyak kirim command yang sama\n" +
 		"Gantian sama yang lain yaa biar ga dianggap <b>SPAMMER</b>"
 }
+
+func AddedGroup(group string) string {
+	return "Halo Kakak-kakak di grup <b>" + group + "</b>\nAsyik grupku bertambah banyak 🥳🥳🥳\n\n" +
+		"Kalau butuh bantuan jangan sungkan ketik /help by private message yaa ☺️"
+}

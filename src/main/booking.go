@@ -61,6 +61,10 @@ func main() {
 	bot.Send(greetingBotOwner, message.OnlineMessage(FullnameBooking), tb.ModeHTML)
 	// bot.Send(postToGroup, message.OnlineMessage(FullnameBooking), tb.ModeHTML)
 
+	bot.Handle(tb.OnAddedToGroup, func(m *tb.Message) {
+		bot.Send(m.Chat, message.AddedGroup(m.Chat.Title), tb.ModeHTML)
+	})
+
 	bot.Handle(tb.OnText, func(m *tb.Message) {
 		commandBot := []string{"/help", "/start", "/status_staging", "/add_staging", "/update_staging", "/book_staging", "/done_staging", "/add_oncall", "/oncall"}
 		commandGroup := []string{"/status_staging", "/add_staging", "/update_staging", "/book_staging", "/done_staging", "/add_oncall", "/oncall"}
