@@ -25,10 +25,10 @@ func BookStaging() string {
 
 	staging = helper.CheckEmptyStaging(textMsg)
 
-	db.BookStaging((strings.ToUpper(staging)), firstName, userID)
+	db.BookStaging((strings.ToUpper(staging)), userName, userID)
 
 	if staging != "" {
-		contentMessage = message.BookStaging(firstName, strings.Trim(staging, " "))
+		contentMessage = message.BookStaging(userName, strings.Trim(staging, " "))
 	} else {
 		contentMessage = message.EmptyBookDoneStaging(userName, baseCommand)
 	}

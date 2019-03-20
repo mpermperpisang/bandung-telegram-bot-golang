@@ -2,6 +2,7 @@ package message
 
 import (
 	"io/ioutil"
+	"strings"
 )
 
 func AddStaging(staging string) string {
@@ -40,8 +41,10 @@ func BookStaging(first_name, staging string) string {
 	data, _ := ioutil.ReadFile("temp.go")
 	content := string(data)
 
-	if content != "" {
+	if strings.Contains(content, "Tolong") {
 		header = "Kak @" + first_name + " memesan "
+	} else if strings.Contains(content, "masih") {
+		header = ""
 	} else {
 		header = StagingNotFound(staging)
 	}

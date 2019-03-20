@@ -9,8 +9,8 @@ func OnlineMessage(name string) string {
 		"\n\nJangan lupa semangat yaa, Kak. 🥰"
 }
 
-func UserSpammer(name string) string {
-	return "Kak @" + name + " udah terlalu banyak kirim command yang sama\n" +
+func UserSpammer(username string) string {
+	return "Kak @" + username + " udah terlalu banyak kirim command yang sama\n" +
 		"Gantian sama yang lain yaa biar ga dianggap <b>SPAMMER</b>"
 }
 

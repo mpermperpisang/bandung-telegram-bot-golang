@@ -6,6 +6,8 @@ import (
 	"regexp"
 	"time"
 
+	"github.com/bandung-telegram-bot-golang/src/db"
+
 	"github.com/bandung-telegram-bot-golang/src/command"
 	"github.com/bandung-telegram-bot-golang/src/helper"
 	"github.com/bandung-telegram-bot-golang/src/message"
@@ -61,6 +63,23 @@ func main() {
 
 	bot.Send(greetingBotOwner, message.OnlineMessage(FullnameSnack), tb.ModeHTML)
 	// bot.Send(postToGroup, message.OnlineMessage(FullnameSnack), tb.ModeHTML)
+
+	bot.Handle(tb.OnUserJoined, func(m *tb.Message) {
+		if m.UserJoined.LanguageCode != "" {
+			bot.Send(m.Chat, message.UserJoin(m.Chat.Title, m.UserJoined.Username), tb.ModeHTML)
+			db.AddOnboarding("@" + m.UserJoined.Username)
+			// bot.Send(m.UserJoined.ID, message.OnboardingUser(), tb.ModeHTML)
+		}
+	})
+
+	bot.Handle(tb.OnUserLeft, func(m *tb.Message) {
+		if m.UserLeft.LanguageCode != "" {
+			bot.Send(m.Chat, message.UserLeft(m.UserLeft.Username), tb.ModeHTML)
+			db.DeleteAdminSnack("@" + m.UserLeft.Username)
+			db.DeleteSnack("@" + m.UserLeft.Username)
+			db.DeleteOnboarding("@" + m.UserLeft.Username)
+		}
+	})
 
 	bot.Handle(tb.OnText, func(m *tb.Message) {
 		commandBot := []string{"/help", "/start", "/done", "/add_snack", "/move", "/permanent", "/delete", "/cancel", "/holiday", "/add_admin", "/delete_admin", "/list_admin"}
