@@ -19,7 +19,7 @@ func MatchAddOnCall() string {
 		admin := []string{os.Getenv("ADMIN1"), os.Getenv("ADMIN2"), os.Getenv("ADMIN3"), os.Getenv("ADMIN4")}
 		includeAdmin, _ := helper.IncludeArray("@"+userName, admin)
 
-		if includeAdmin == true {
+		if includeAdmin {
 			GoToFunc = AddOnCall
 		} else {
 			contentMessage = message.OncallAdmin(userName, baseCommand, admin)

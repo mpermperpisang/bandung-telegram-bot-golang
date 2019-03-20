@@ -22,7 +22,7 @@ func UpdateStaging(staging string) {
 	for _, list := range stgNumber {
 		includeStaging, _ := helper.IncludeArray(list, stgArray)
 
-		if includeStaging == false {
+		if !includeStaging {
 			_, err := db.Exec("UPDATE booking_staging SET book_squad='" + stgSquad + "' WHERE book_staging='" + list + "'")
 			helper.ErrorMessage(err)
 

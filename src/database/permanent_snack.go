@@ -22,9 +22,9 @@ func PermanentSnack(snack string) {
 	for _, list := range listSchedule {
 		snackDay := regexp.MustCompile(helper.RegexCompileSnackDay()).FindString(list)
 		snackUsername := regexp.MustCompile(helper.RegexCompileUsername()).FindString(list)
-		includeStaging, _ := helper.IncludeArray(snackUsername, snackArray)
+		includeSnack, _ := helper.IncludeArray(snackUsername, snackArray)
 
-		if includeStaging == false {
+		if !includeSnack {
 			row := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + snackUsername + "'").Scan(&count)
 			if row != sql.ErrNoRows {
 				_, err := db.Exec("UPDATE bandung_snack SET fix_day='" + strings.Trim(snackDay, " ") + "', day='" + strings.Trim(snackDay, " ") + "' WHERE name='" + snackUsername + "'")

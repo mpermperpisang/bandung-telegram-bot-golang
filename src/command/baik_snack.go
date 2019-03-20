@@ -6,6 +6,7 @@ import (
 	"github.com/bandung-telegram-bot-golang/src/database"
 	"github.com/bandung-telegram-bot-golang/src/helper"
 	"github.com/bandung-telegram-bot-golang/src/message"
+	"github.com/bandung-telegram-bot-golang/src/user"
 )
 
 func MatchBaikSnack() string {
@@ -21,9 +22,18 @@ func MatchBaikSnack() string {
 }
 
 func BaikSnack() string {
-	database.BaikSnack(userName)
+	var admin bool
 
-	contentMessage = message.BaikSnack(userName)
+	admin = user.IsAdmin(userName)
+
+	if admin {
+		database.BaikSnack(userName)
+
+		contentMessage = message.BaikSnack(userName)
+	} else {
+		contentMessage = message.UserAdmin(userName, baseCommand)
+	}
+
 	sendTo = msg.Chat
 
 	return "success"

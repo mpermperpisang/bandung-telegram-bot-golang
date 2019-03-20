@@ -20,9 +20,9 @@ func AddSnack(snack string) {
 	for _, list := range listSchedule {
 		snackDay := regexp.MustCompile(helper.RegexCompileSnackDay()).FindString(list)
 		snackUsername := regexp.MustCompile(helper.RegexCompileUsername()).FindString(list)
-		includeStaging, _ := helper.IncludeArray(snackUsername, snackArray)
+		includeSnack, _ := helper.IncludeArray(snackUsername, snackArray)
 
-		if includeStaging == false {
+		if !includeSnack {
 			_, err := db.Exec("INSERT INTO bandung_snack VALUES ('" + strings.Trim(snackDay, " ") + "', '" + strings.Trim(snackDay, " ") + "', '" + snackUsername + "', 'sudah', '-')")
 			helper.ErrorMessage(err)
 

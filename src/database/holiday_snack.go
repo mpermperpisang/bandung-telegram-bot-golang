@@ -20,9 +20,9 @@ func HolidaySnack(snack string) {
 	defer file.Close()
 
 	for _, username := range listUsername {
-		includeStaging, _ := helper.IncludeArray(username, snackArray)
+		includeSnack, _ := helper.IncludeArray(username, snackArray)
 
-		if includeStaging == false {
+		if !includeSnack {
 			if username == "@all" {
 				_, err := db.Exec("UPDATE bandung_snack SET status='libur' WHERE day='" + strings.ToLower(helper.DayNow()) + "' and name<>''")
 				helper.ErrorMessage(err)

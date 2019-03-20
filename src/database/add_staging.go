@@ -20,7 +20,7 @@ func AddStaging(staging string) {
 	for _, list := range stgNumber {
 		includeStaging, _ := helper.IncludeArray(list, stgArray)
 
-		if includeStaging == false {
+		if !includeStaging {
 			_, err := db.Exec("INSERT INTO booking_staging VALUES ('" + list + "', 'book', '0', 'book', 'done', '" + stgSquad + "')")
 			helper.ErrorMessage(err)
 

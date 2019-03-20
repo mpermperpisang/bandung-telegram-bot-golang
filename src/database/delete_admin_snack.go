@@ -19,9 +19,9 @@ func DeleteAdminSnack(username string) {
 	defer file.Close()
 
 	for _, username := range listUsername {
-		includeStaging, _ := helper.IncludeArray(username, snackArray)
+		includeSnack, _ := helper.IncludeArray(username, snackArray)
 
-		if includeStaging == false {
+		if !includeSnack {
 			row := db.QueryRow("SELECT * FROM admin_snack WHERE adm_username='" + username + "'").Scan(&count)
 
 			if row != sql.ErrNoRows {

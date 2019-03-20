@@ -21,7 +21,7 @@ func StatusStaging(staging string) {
 	for _, list := range stg {
 		includeStaging, _ := helper.IncludeArray(list, stgArray)
 
-		if includeStaging == false {
+		if !includeStaging {
 			stgList := strings.Trim(list, " ")
 			rows, err := db.Query("SELECT book_staging, book_status, book_branch, book_name FROM booking_staging WHERE (book_staging='" + stgList + "' or book_squad='" + stgList + "')")
 			helper.ErrorMessage(err)
@@ -39,7 +39,7 @@ func StatusStaging(staging string) {
 				content := "<code>Staging" + stgNumber + "</code> : <b>" + strings.ToUpper(status) + "</b>\n" + branch + "\n" + user + "\n\n"
 				includeNumber, _ := helper.IncludeArray(stgNumber, stgStatus)
 
-				if includeNumber == false {
+				if !includeNumber {
 					file.WriteString(content)
 
 					stgStatus = append(stgStatus, stgNumber)
