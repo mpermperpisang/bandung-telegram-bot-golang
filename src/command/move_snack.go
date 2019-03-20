@@ -25,17 +25,19 @@ func MoveSnack() string {
 	var admin bool
 	var snack string
 
-	admin = user.IsAdmin(firstName)
+	admin = user.IsAdmin(userName)
 	snack = helper.CheckEmptyDayUsername(textMsg)
 
 	if admin {
 		database.MoveSnack(snack)
-	}
 
-	if snack != "" {
-		contentMessage = message.MoveSnack(snack, firstName)
+		if snack != "" {
+			contentMessage = message.MoveSnack(snack, userName)
+		} else {
+			contentMessage = message.EmptyDayUsername(userName, baseCommand)
+		}
 	} else {
-		contentMessage = message.EmptyDayUsername(userName, baseCommand)
+		contentMessage = message.UserAdmin(userName, baseCommand)
 	}
 
 	if strings.Contains(contentMessage, "Cihuy") {

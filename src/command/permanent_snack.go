@@ -25,17 +25,19 @@ func PermanentSnack() string {
 	var admin bool
 	var snack string
 
-	admin = user.IsAdmin(firstName)
+	admin = user.IsAdmin(userName)
 	snack = helper.CheckEmptyDayUsername(textMsg)
 
 	if admin {
 		database.PermanentSnack(snack)
-	}
 
-	if snack != "" {
-		contentMessage = message.PermanentSnack(snack, firstName)
+		if snack != "" {
+			contentMessage = message.PermanentSnack(snack, firstName)
+		} else {
+			contentMessage = message.EmptyDayUsername(userName, baseCommand)
+		}
 	} else {
-		contentMessage = message.EmptyDayUsername(userName, baseCommand)
+		contentMessage = message.UserAdmin(userName, baseCommand)
 	}
 
 	if strings.Contains(contentMessage, "Cihuy") {

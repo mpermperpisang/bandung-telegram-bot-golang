@@ -25,17 +25,19 @@ func DeleteSnack() string {
 	var admin bool
 	var snack string
 
-	admin = user.IsAdmin(firstName)
+	admin = user.IsAdmin(userName)
 	snack = helper.CheckEmptyUsername(textMsg)
 
 	if admin {
 		database.DeleteSnack(textMsg)
-	}
 
-	if snack != "" {
-		contentMessage = message.DeleteSnack(snack, firstName)
+		if snack != "" {
+			contentMessage = message.DeleteSnack(snack, firstName)
+		} else {
+			contentMessage = message.EmptyUsername(userName, baseCommand)
+		}
 	} else {
-		contentMessage = message.EmptyUsername(userName, baseCommand)
+		contentMessage = message.UserAdmin(userName, baseCommand)
 	}
 
 	if strings.Contains(contentMessage, "Colek") {

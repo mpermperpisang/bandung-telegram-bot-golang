@@ -30,12 +30,14 @@ func AddSnack() string {
 
 	if admin {
 		database.AddSnack(snack)
-	}
 
-	if snack != "" {
-		contentMessage = message.AddSnack(snack, userName)
+		if snack != "" {
+			contentMessage = message.AddSnack(snack, userName)
+		} else {
+			contentMessage = message.EmptyDayUsername(userName, baseCommand)
+		}
 	} else {
-		contentMessage = message.EmptyDayUsername(userName, baseCommand)
+		contentMessage = message.UserAdmin(userName, baseCommand)
 	}
 
 	if strings.Contains(contentMessage, "Cihuy") {

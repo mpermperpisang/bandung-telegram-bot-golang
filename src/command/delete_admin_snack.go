@@ -30,12 +30,14 @@ func DeleteAdminSnack() string {
 
 	if admin {
 		database.DeleteAdminSnack(textMsg)
-	}
 
-	if snack != "" {
-		contentMessage = message.DeleteAdminSnack(snack, userName)
+		if snack != "" {
+			contentMessage = message.DeleteAdminSnack(snack, userName)
+		} else {
+			contentMessage = message.EmptyUsername(userName, baseCommand)
+		}
 	} else {
-		contentMessage = message.EmptyUsername(userName, baseCommand)
+		contentMessage = message.UserAdmin(userName, baseCommand)
 	}
 
 	if strings.Contains(contentMessage, "Yaah") {

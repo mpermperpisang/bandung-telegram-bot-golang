@@ -25,17 +25,19 @@ func CancelSnack() string {
 	var admin bool
 	var snack string
 
-	admin = user.IsAdmin(firstName)
+	admin = user.IsAdmin(userName)
 	snack = helper.CheckEmptyUsername(textMsg)
 
 	if admin {
 		database.CancelSnack(textMsg)
-	}
 
-	if snack != "" {
-		contentMessage = message.CancelSnack(snack, firstName)
+		if snack != "" {
+			contentMessage = message.CancelSnack(snack, firstName)
+		} else {
+			contentMessage = message.EmptyUsername(userName, baseCommand)
+		}
 	} else {
-		contentMessage = message.EmptyUsername(userName, baseCommand)
+		contentMessage = message.UserAdmin(userName, baseCommand)
 	}
 
 	if strings.Contains(contentMessage, "dibatalin") {

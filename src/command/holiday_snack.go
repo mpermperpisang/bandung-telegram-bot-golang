@@ -30,12 +30,14 @@ func HolidaySnack() string {
 
 	if admin {
 		database.HolidaySnack(textMsg)
-	}
 
-	if snack != "" {
-		contentMessage = message.HolidaySnack(snack, userName)
+		if snack != "" {
+			contentMessage = message.HolidaySnack(snack, userName)
+		} else {
+			contentMessage = message.EmptyUsername(userName, baseCommand)
+		}
 	} else {
-		contentMessage = message.EmptyUsername(userName, baseCommand)
+		contentMessage = message.UserAdmin(userName, baseCommand)
 	}
 
 	if strings.Contains(contentMessage, "diliburin") {

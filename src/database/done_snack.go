@@ -17,15 +17,14 @@ func DoneSnack(username string, id int) {
 
 	defer file.Close()
 
-	rowUsername := db.QueryRow("SELECT * FROM bandung_snack WHERE name='@" + username + "'").Scan(&count)
-	rowSchedule := db.QueryRow("SELECT * FROM bandung_snack WHERE name='@" + username + "', day='" + strings.ToLower(helper.DayNow()) + "' and status='belum'").Scan(&count)
+	rowSchedule := db.QueryRow("SELECT * FROM bandung_snack WHERE name='@" + username + "' and day='" + strings.ToLower(helper.DayNow()) + "' and status='belum'").Scan(&count)
 
-	if rowUsername != sql.ErrNoRows && rowSchedule == sql.ErrNoRows {
+	if rowSchedule == sql.ErrNoRows {
+		file.WriteString("\n- <code>" + username + "</code> siapa tuh? 👻")
+	} else {
 		_, err := db.Exec("UPDATE bandung_snack SET status='sudah', from_id='" + strconv.Itoa(id) + "' WHERE name='@" + username + "' and day='" + strings.ToLower(helper.DayNow()) + "' and status='belum'")
 		helper.ErrorMessage(err)
 
 		file.WriteString("\nSelamat menggendutkan diri, kawan-kawan\n😈")
-	} else {
-		file.WriteString("\n- <code>" + username + "</code> siapa tuh? 👻")
 	}
 }
