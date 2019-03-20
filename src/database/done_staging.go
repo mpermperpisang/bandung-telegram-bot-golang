@@ -24,8 +24,8 @@ func DoneStaging(staging, first_name string, user_id int) {
 	helper.ErrorMessage(err)
 
 	if err != nil || row == sql.ErrNoRows {
-		file.WriteString("staging yang belum ditambahkan ke daftar\nContoh : <code>/add_staging squad_name staging_number1 staging_number2 staging_number3</code> dan seterusnya")
+		file.WriteString("\nContoh : <code>/add_staging squad_name staging_number1 staging_number2 staging_number3</code> dan seterusnya")
 	} else {
-		file.WriteString("staging" + stgList + ".vm")
+		file.WriteString("<b>staging" + stgList + ".vm</b>")
 	}
 }

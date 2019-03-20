@@ -58,7 +58,7 @@ func DoneStaging(first_name, staging string) string {
 	data, _ := ioutil.ReadFile("temp.go")
 	content := string(data)
 
-	if content != "" {
+	if strings.Contains(content, ".vm") {
 		header = "Kak @" + first_name + " sudah selesai pakai "
 	} else {
 		header = StagingNotFound(staging)

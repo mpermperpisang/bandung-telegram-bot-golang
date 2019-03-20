@@ -46,6 +46,6 @@ func BookStaging(staging, username string, user_id int) {
 			file.WriteString("Kamu masih booking <b>staging" + stgList + ".vm</b> kok, Kak 😊")
 		}
 	} else {
-		file.WriteString("staging yang belum ditambahkan ke daftar\nContoh : <code>/add_staging squad_name staging_number1 staging_number2 staging_number3</code> dan seterusnya")
+		file.WriteString("\nContoh : <code>/add_staging squad_name staging_number1 staging_number2 staging_number3</code> dan seterusnya")
 	}
 }
