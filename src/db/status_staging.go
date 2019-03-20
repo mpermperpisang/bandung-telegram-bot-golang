@@ -9,8 +9,8 @@ import (
 )
 
 func StatusStaging(staging string) {
-	var stgName, status, branch, username, user string
-	var stgArray []string
+	var stgNumber, status, branch, username, user string
+	var stgArray, stgStatus []string
 
 	db := DBConnection()
 	file := helper.CreateFile()
@@ -27,7 +27,7 @@ func StatusStaging(staging string) {
 			helper.ErrorMessage(err)
 
 			for rows.Next() {
-				err = rows.Scan(&stgName, &status, &branch, &username)
+				err = rows.Scan(&stgNumber, &status, &branch, &username)
 				helper.ErrorMessage(err)
 
 				if status == "done" {
@@ -36,9 +36,14 @@ func StatusStaging(staging string) {
 					user = "@" + username
 				}
 
-				content := "<code>Staging" + stgName + "</code> : <b>" + strings.ToUpper(status) + "</b>\n" + branch + "\n" + user + "\n\n"
+				content := "<code>Staging" + stgNumber + "</code> : <b>" + strings.ToUpper(status) + "</b>\n" + branch + "\n" + user + "\n\n"
+				includeNumber, _ := helper.IncludeArray(stgNumber, stgStatus)
 
-				file.WriteString(content)
+				if includeNumber == false {
+					file.WriteString(content)
+
+					stgStatus = append(stgStatus, stgNumber)
+				}
 			}
 
 			stgArray = append(stgArray, list)
