@@ -17,10 +17,13 @@ func MatchAddOnCall() string {
 
 	if pattern == true {
 		admin := []string{os.Getenv("ADMIN1"), os.Getenv("ADMIN2"), os.Getenv("ADMIN3"), os.Getenv("ADMIN4")}
-		includeAdmin, _ := helper.IncludeArray(userName, admin)
+		includeAdmin, _ := helper.IncludeArray("@"+userName, admin)
 
 		if includeAdmin == true {
 			GoToFunc = AddOnCall
+		} else {
+			contentMessage = message.OncallAdmin(userName, baseCommand, admin)
+			return contentMessage
 		}
 	} else {
 		return "not match"

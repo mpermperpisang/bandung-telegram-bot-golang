@@ -1,5 +1,7 @@
 package message
 
+import "strings"
+
 func DefaultHelp() string {
 	return "Maaf, Kak\nKonten bantuan belum tersedia"
 }
@@ -15,7 +17,14 @@ func UserSpammer(username string) string {
 }
 
 func UserAdmin(username, command string) string {
-	return "Maaf Kak @" + username + ", command <code>" + command + "</code> cuma bisa sama admin. Klik /list_admin yaa"
+	return "Maaf Kak @" + username + ", command <code>" + command + "</code> cuma bisa sama admin.\n" +
+		"Klik /list_admin yaa"
+}
+
+func OncallAdmin(username, command string, admin []string) string {
+	adminList := strings.Join(admin, " ")
+	return "Maaf Kak @" + username + ", command <code>" + command + "</code> cuma bisa sama admin.\n" +
+		"Admin oncall adalah " + adminList
 }
 
 func AddedGroup(group string) string {
