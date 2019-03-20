@@ -1,4 +1,4 @@
-package db
+package database
 
 import (
 	"github.com/bandung-telegram-bot-golang/src/helper"
