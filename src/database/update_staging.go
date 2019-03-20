@@ -1,4 +1,4 @@
-package db
+package database
 
 import (
 	"regexp"
@@ -7,7 +7,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func AddStaging(staging string) {
+func UpdateStaging(staging string) {
 	var stgArray []string
 
 	db := DBConnection()
@@ -17,18 +17,16 @@ func AddStaging(staging string) {
 
 	defer file.Close()
 
+	file.WriteString("<b>" + stgSquad + "</b>" + " :")
+
 	for _, list := range stgNumber {
 		includeStaging, _ := helper.IncludeArray(list, stgArray)
 
 		if includeStaging == false {
-			_, err := db.Exec("INSERT INTO booking_staging VALUES ('" + list + "', 'book', '0', 'book', 'done', '" + stgSquad + "')")
+			_, err := db.Exec("UPDATE booking_staging SET book_squad='" + stgSquad + "' WHERE book_staging='" + list + "'")
 			helper.ErrorMessage(err)
 
-			if err != nil {
-				file.WriteString("\n- <b>staging" + list + ".vm</b> sudah terdaftar")
-			} else {
-				file.WriteString("\n- <b>staging" + list + ".vm</b> berhasil ditambahkan")
-			}
+			file.WriteString("\n- staging" + list + ".vm")
 
 			stgArray = append(stgArray, list)
 		}

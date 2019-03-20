@@ -3,7 +3,7 @@ package command
 import (
 	"strings"
 
-	"github.com/bandung-telegram-bot-golang/src/db"
+	"github.com/bandung-telegram-bot-golang/src/database"
 	"github.com/bandung-telegram-bot-golang/src/helper"
 	"github.com/bandung-telegram-bot-golang/src/message"
 )
@@ -21,10 +21,10 @@ func MatchListAdminSnack() string {
 }
 
 func ListAdminSnack() string {
-	db.ListAdminSnack()
+	database.ListAdminSnack()
 
 	contentMessage = message.ListAdminSnack(userName)
-	sendTo = sendToGroup
+	sendTo = msg.Chat
 
 	return "success"
 }

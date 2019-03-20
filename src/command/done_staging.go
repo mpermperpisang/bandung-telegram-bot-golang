@@ -3,7 +3,7 @@ package command
 import (
 	"strings"
 
-	"github.com/bandung-telegram-bot-golang/src/db"
+	"github.com/bandung-telegram-bot-golang/src/database"
 	"github.com/bandung-telegram-bot-golang/src/helper"
 	"github.com/bandung-telegram-bot-golang/src/message"
 )
@@ -25,7 +25,7 @@ func DoneStaging() string {
 
 	staging = helper.CheckEmptyStaging(textMsg)
 
-	db.DoneStaging((strings.ToUpper(staging)), firstName, userID)
+	database.DoneStaging((strings.ToUpper(staging)), firstName, userID)
 
 	if staging != "" {
 		contentMessage = message.DoneStaging(userName, strings.Trim(staging, " "))

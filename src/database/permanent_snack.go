@@ -1,6 +1,7 @@
-package db
+package database
 
 import (
+	"database/sql"
 	"regexp"
 	"strings"
 
@@ -8,8 +9,9 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func AddSnack(snack string) {
+func PermanentSnack(snack string) {
 	var snackArray []string
+	var count int
 
 	db := DBConnection()
 	file := helper.CreateFile()
@@ -23,13 +25,14 @@ func AddSnack(snack string) {
 		includeStaging, _ := helper.IncludeArray(snackUsername, snackArray)
 
 		if includeStaging == false {
-			_, err := db.Exec("INSERT INTO bandung_snack VALUES ('" + strings.Trim(snackDay, " ") + "', '" + strings.Trim(snackDay, " ") + "', '" + snackUsername + "', 'sudah', '-')")
-			helper.ErrorMessage(err)
+			row := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + snackUsername + "'").Scan(&count)
+			if row != sql.ErrNoRows {
+				_, err := db.Exec("UPDATE bandung_snack SET fix_day='" + strings.Trim(snackDay, " ") + "', day='" + strings.Trim(snackDay, " ") + "' WHERE name='" + snackUsername + "'")
+				helper.ErrorMessage(err)
 
-			if err != nil {
-				file.WriteString("\n- <code>" + snackUsername + "</code> sudah ada jadwal snack")
+				file.WriteString("\n- " + snackUsername + " pindah selamanya ke hari <b>" + helper.DayName(strings.Trim(snackDay, " ")) + "</b>")
 			} else {
-				file.WriteString("\n- " + snackUsername + " bawa snack di hari <b>" + helper.DayName(strings.Trim(snackDay, " ")) + "</b>")
+				file.WriteString("\n- <code>" + snackUsername + "</code> siapa tuh? 👻")
 			}
 
 			snackArray = append(snackArray, snackUsername)

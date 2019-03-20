@@ -3,7 +3,7 @@ package command
 import (
 	"strings"
 
-	"github.com/bandung-telegram-bot-golang/src/db"
+	"github.com/bandung-telegram-bot-golang/src/database"
 	"github.com/bandung-telegram-bot-golang/src/helper"
 	"github.com/bandung-telegram-bot-golang/src/message"
 )
@@ -21,7 +21,7 @@ func MatchDoneSnack() string {
 }
 
 func DoneSnack() string {
-	db.DoneSnack(userName, userID)
+	database.DoneSnack(userName, userID)
 
 	contentMessage = message.DoneSnack(userName, firstName)
 

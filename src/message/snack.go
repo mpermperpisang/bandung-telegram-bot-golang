@@ -121,7 +121,7 @@ func AddAdminSnack(snack, username string) string {
 	if strings.Contains(content, "resmi") {
 		header = "Cihuy Kak @" + username + " nambahin admin snack 🎉👏🏻🥳\n"
 	} else {
-		header = "Kok didaftarin lagi sih, Kak @" + username + "? 😵\n"
+		header = "Kok adminnya didaftarin lagi sih, Kak @" + username + "? 😵\n"
 	}
 
 	return header + content

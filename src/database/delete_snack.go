@@ -1,4 +1,4 @@
-package db
+package database
 
 import (
 	"database/sql"
@@ -8,7 +8,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func CancelSnack(snack string) {
+func DeleteSnack(snack string) {
 	var snackArray []string
 	var count int
 
@@ -25,10 +25,10 @@ func CancelSnack(snack string) {
 			row := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + username + "'").Scan(&count)
 
 			if row != sql.ErrNoRows {
-				_, err := db.Exec("UPDATE bandung_snack SET status='belum' WHERE name='" + username + "'")
+				_, err := db.Exec("DELETE FROM bandung_snack WHERE name='" + username + "'")
 				helper.ErrorMessage(err)
 
-				file.WriteString("\n- Kak " + username + " ora jadi bawa snack")
+				file.WriteString("\n- ByBy Kak " + username)
 			} else {
 				file.WriteString("\n- <code>" + username + "</code> siapa tuh? 👻")
 			}

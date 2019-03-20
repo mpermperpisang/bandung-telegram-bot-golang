@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"strings"
 	"time"
 
 	"github.com/bandung-telegram-bot-golang/src/db"
 
 	"github.com/bandung-telegram-bot-golang/src/command"
+	"github.com/bandung-telegram-bot-golang/src/database"
 	"github.com/bandung-telegram-bot-golang/src/helper"
 	"github.com/bandung-telegram-bot-golang/src/message"
 	"github.com/bandung-telegram-bot-golang/src/user"
@@ -67,17 +69,30 @@ func main() {
 	bot.Handle(tb.OnUserJoined, func(m *tb.Message) {
 		if m.UserJoined.LanguageCode != "" {
 			bot.Send(m.Chat, message.UserJoin(m.Chat.Title, m.UserJoined.Username), tb.ModeHTML)
+<<<<<<< HEAD
+			database.AddOnboarding("@" + m.UserJoined.Username)
+			bot.Send(m.UserJoined, message.OnboardingUser(m.UserJoined.FirstName, m.UserJoined.LastName), tb.ModeHTML)
+=======
 			db.AddOnboarding("@" + m.UserJoined.Username)
 			// bot.Send(m.UserJoined.ID, message.OnboardingUser(), tb.ModeHTML)
+>>>>>>> 0bf34c0d62a747c009237eed2cf0ede2388788f7
 		}
 	})
 
 	bot.Handle(tb.OnUserLeft, func(m *tb.Message) {
 		if m.UserLeft.LanguageCode != "" {
+<<<<<<< HEAD
+			bot.Send(m.Chat, message.UserLeft("@"+m.UserLeft.Username), tb.ModeHTML)
+			bot.Send(m.UserLeft, message.UserLeft(m.UserLeft.FirstName), tb.ModeHTML)
+			database.DeleteAdminSnack("@" + m.UserLeft.Username)
+			database.DeleteSnack("@" + m.UserLeft.Username)
+			database.DeleteOnboarding("@" + m.UserLeft.Username)
+=======
 			bot.Send(m.Chat, message.UserLeft(m.UserLeft.Username), tb.ModeHTML)
 			db.DeleteAdminSnack("@" + m.UserLeft.Username)
 			db.DeleteSnack("@" + m.UserLeft.Username)
 			db.DeleteOnboarding("@" + m.UserLeft.Username)
+>>>>>>> 0bf34c0d62a747c009237eed2cf0ede2388788f7
 		}
 	})
 
@@ -87,6 +102,36 @@ func main() {
 		baseCommand := regexp.MustCompile(helper.RegexCompileBaseCommand()).FindString(m.Text)
 		spammer := user.IsSpammer(m.Sender.Username, baseCommand)
 
+<<<<<<< HEAD
+		if !m.Private() && !database.NewOnboarding(m.Sender.Username) {
+			bot.Send(postToGroup, "Kak @"+m.Sender.Username+", please japri @"+os.Getenv("BOT_SNACK")+" dulu yaa.. Nuhun")
+		} else if m.Private() && !database.NewOnboarding(m.Sender.Username) {
+			content := command.NewOnboarding(m.Text, m.Sender.Username)
+			bot.Send(m.Sender, content, tb.ModeHTML)
+			if strings.Contains(content, "selanjutnya") {
+				bot.Send(postToGroup, message.OnboardingSuccess(m.Text, m.Sender.Username), tb.ModeHTML)
+			}
+		} else {
+			for i := 0; i < len(commandBot); i++ {
+				if !m.Private() {
+					if baseCommand == commandGroup[i] {
+						if spammer {
+							bot.Send(m.Sender, message.UserSpammer(m.Sender.Username), tb.ModeHTML)
+						} else {
+							command.Actions(bot, m, UsernameSnack, baseCommand, postToGroup)
+						}
+
+						user.SaveSpammer(m.Sender.Username, baseCommand)
+					}
+
+					if baseCommand == commandBot[i] {
+						bot.Delete(m)
+					}
+				} else {
+					if baseCommand == commandBot[i] {
+						command.Actions(bot, m, UsernameSnack, baseCommand, postToGroup)
+					}
+=======
 		for i := 0; i < len(commandBot); i++ {
 			if !m.Private() {
 				if baseCommand == commandGroup[i] {
@@ -105,6 +150,7 @@ func main() {
 			} else {
 				if baseCommand == commandBot[i] {
 					command.Actions(bot, m, UsernameSnack, baseCommand, postToGroup)
+>>>>>>> 0bf34c0d62a747c009237eed2cf0ede2388788f7
 				}
 			}
 		}

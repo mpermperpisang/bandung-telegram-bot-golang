@@ -1,21 +1,19 @@
 package user
 
-import (
-	"github.com/bandung-telegram-bot-golang/src/db"
-)
+import "github.com/bandung-telegram-bot-golang/src/database"
 
 func IsAdmin(username string) bool {
-	query := db.CheckAdmin(username)
+	query := database.CheckAdmin(username)
 
 	return query
 }
 
 func IsSpammer(username, command string) bool {
-	query := db.CheckSpammer(username, command)
+	query := database.CheckSpammer(username, command)
 
 	return query
 }
 
 func SaveSpammer(username, command string) {
-	db.SaveSpammer(username, command)
+	database.SaveSpammer(username, command)
 }

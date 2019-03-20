@@ -3,7 +3,7 @@ package command
 import (
 	"strings"
 
-	"github.com/bandung-telegram-bot-golang/src/db"
+	"github.com/bandung-telegram-bot-golang/src/database"
 	"github.com/bandung-telegram-bot-golang/src/helper"
 	"github.com/bandung-telegram-bot-golang/src/message"
 	"github.com/bandung-telegram-bot-golang/src/user"
@@ -29,7 +29,7 @@ func MoveSnack() string {
 	snack = helper.CheckEmptyDayUsername(textMsg)
 
 	if admin {
-		db.MoveSnack(snack)
+		database.MoveSnack(snack)
 	}
 
 	if snack != "" {

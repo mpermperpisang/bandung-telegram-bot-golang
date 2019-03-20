@@ -3,7 +3,7 @@ package command
 import (
 	"strings"
 
-	"github.com/bandung-telegram-bot-golang/src/db"
+	"github.com/bandung-telegram-bot-golang/src/database"
 	"github.com/bandung-telegram-bot-golang/src/helper"
 	"github.com/bandung-telegram-bot-golang/src/message"
 	"github.com/bandung-telegram-bot-golang/src/user"
@@ -29,13 +29,15 @@ func AddAdminSnack() string {
 	snack = helper.CheckEmptyUsername(textMsg)
 
 	if admin {
-		db.AddAdminSnack(textMsg)
-	}
+		database.AddAdminSnack(textMsg)
 
-	if snack != "" {
-		contentMessage = message.AddAdminSnack(snack, userName)
+		if snack != "" {
+			contentMessage = message.AddAdminSnack(snack, userName)
+		} else {
+			contentMessage = message.EmptyUsername(userName, baseCommand)
+		}
 	} else {
-		contentMessage = message.EmptyUsername(userName, baseCommand)
+		contentMessage = message.UserAdmin(userName, baseCommand)
 	}
 
 	if strings.Contains(contentMessage, "Cihuy") {
