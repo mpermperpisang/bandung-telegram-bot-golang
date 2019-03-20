@@ -83,8 +83,8 @@ func main() {
 	})
 
 	bot.Handle(tb.OnText, func(m *tb.Message) {
-		commandBot := []string{"/help", "/start", "/done", "/add_snack", "/move", "/permanent", "/delete", "/cancel", "/holiday", "/add_admin", "/delete_admin", "/list_admin"}
-		commandGroup := []string{"/add_snack", "/move", "/permanent", "/delete", "/cancel", "/holiday", "/add_admin", "/delete_admin", "/list_admin"}
+		commandBot := []string{"/help", "/start", "/done", "/add_snack", "/move", "/permanent", "/delete", "/cancel", "/holiday", "/add_admin", "/delete_admin", "/list_admin", "/baik"}
+		commandGroup := []string{"/add_snack", "/move", "/permanent", "/delete", "/cancel", "/holiday", "/add_admin", "/delete_admin", "/list_admin", "/baik"}
 		baseCommand := regexp.MustCompile(helper.RegexCompileBaseCommand()).FindString(m.Text)
 		spammer := user.IsSpammer(m.Sender.Username, baseCommand)
 

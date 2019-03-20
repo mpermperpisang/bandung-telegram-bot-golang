@@ -29,7 +29,7 @@ func RegexCompileBaseCommand() string {
 }
 
 func RegexCompileCheckEmptyDayUsername() string {
-	return `\s[a-zA-Z@ ]+`
+	return `\s[a-zA-Z].*[@][a-zA-Z0-9_]+`
 }
 
 func RegexCompileSnackDay() string {

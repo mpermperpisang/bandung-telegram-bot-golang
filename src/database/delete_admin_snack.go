@@ -1,6 +1,7 @@
 package database
 
 import (
+	"database/sql"
 	"regexp"
 
 	"github.com/bandung-telegram-bot-golang/src/helper"
@@ -9,6 +10,7 @@ import (
 
 func DeleteAdminSnack(username string) {
 	var snackArray []string
+	var count int
 
 	db := DBConnection()
 	file := helper.CreateFile()
@@ -20,13 +22,15 @@ func DeleteAdminSnack(username string) {
 		includeStaging, _ := helper.IncludeArray(username, snackArray)
 
 		if includeStaging == false {
-			_, err := db.Exec("DELETE FROM admin_snack WHERE adm_username='" + username + "'")
-			helper.ErrorMessage(err)
+			row := db.QueryRow("SELECT * FROM admin_snack WHERE adm_username='" + username + "'").Scan(&count)
 
-			if err != nil {
-				file.WriteString("\n- <code>" + username + "</code> siapa tuh? 👻")
-			} else {
+			if row != sql.ErrNoRows {
+				_, err := db.Exec("DELETE FROM admin_snack WHERE adm_username='" + username + "'")
+				helper.ErrorMessage(err)
+
 				file.WriteString("\n- " + username + " sudah dihapus dari daftar admin snack")
+			} else {
+				file.WriteString("\n- <code>" + username + "</code> siapa tuh? 👻")
 			}
 
 			snackArray = append(snackArray, username)

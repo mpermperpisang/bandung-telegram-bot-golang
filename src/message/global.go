@@ -24,7 +24,7 @@ func EmptySquadStaging(username, command string) string {
 
 func EmptyDayUsername(username, command string) string {
 	return "Commandnya belum benar, Kak @" + username + "\n" +
-		"Contoh : <code>" + command + " day1 @username @day2 @username @day3 @username</code> dan seterusnya"
+		"Contoh : <code>" + command + " day1 @username1 @day2 @username2 @day3 @username3</code> dan seterusnya"
 }
 
 func EmptyUsername(username, command string) string {

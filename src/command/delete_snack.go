@@ -32,7 +32,7 @@ func DeleteSnack() string {
 		database.DeleteSnack(textMsg)
 
 		if snack != "" {
-			contentMessage = message.DeleteSnack(snack, firstName)
+			contentMessage = message.DeleteSnack(snack, userName)
 		} else {
 			contentMessage = message.EmptyUsername(userName, baseCommand)
 		}

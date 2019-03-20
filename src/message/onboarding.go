@@ -45,7 +45,15 @@ func ValidOnboarding() string {
 
 func InvalidOnboarding() string {
 	return "Pengisian biodatanya masih salah. Ingat, Kak.\n" +
-		"*** Sebaiknya gunakan <b>HURUF</b> dan <b>ANGKA</b> saja.\n" +
+		"*** Sebaiknya gunakan <b>HURUF</b> dan <b>ANGKA</b> saja.\n\n" +
+		"Contoh :\n" +
+		"🐾 Nama panggilan : Mbot\n" +
+		"🐾 Job title : Bot pengingat jadwal snack\n" +
+		"🐾 Squad : Bandung\n" +
+		"🐾 Pekerjaan atau Pendidikan terakhir : Anggota JKT48\n" +
+		"🐾 Status : Digantung owner\n" +
+		"🐾 Hobi : Ngingetin jadwal snack\n" +
+		"🐾 Motto : Pelembut pakaian\n\n" +
 		"*** Chat ini tidak akan hilang sebelum Kakak mengirimkan biodata dengan format yang benar 😈\n" +
 		"Jika ada kendala harap hubungi Kak @mpermperpisang yaa #semangat"
 }

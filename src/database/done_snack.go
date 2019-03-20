@@ -10,21 +10,28 @@ import (
 )
 
 func DoneSnack(username string, id int) {
-	var count int
+	var count, countDone int
 
 	db := DBConnection()
 	file := helper.CreateFile()
 
 	defer file.Close()
 
-	rowSchedule := db.QueryRow("SELECT * FROM bandung_snack WHERE name='@" + username + "' and day='" + strings.ToLower(helper.DayNow()) + "' and status='belum'").Scan(&count)
+	snackCount, _ := db.Query("SELECT count FROM bandung_snack WHERE name='@" + username + "' and day='" + strings.ToLower(helper.DayNow()) + "' and status='belum'")
+	rowSchedule := snackCount.Scan(&count)
 
-	if rowSchedule == sql.ErrNoRows {
-		file.WriteString("\n- <code>" + username + "</code> siapa tuh? 👻")
-	} else {
-		_, err := db.Exec("UPDATE bandung_snack SET status='sudah', from_id='" + strconv.Itoa(id) + "' WHERE name='@" + username + "' and day='" + strings.ToLower(helper.DayNow()) + "' and status='belum'")
+	for snackCount.Next() {
+		err := snackCount.Scan(&countDone)
 		helper.ErrorMessage(err)
 
-		file.WriteString("\nSelamat menggendutkan diri, kawan-kawan\n😈")
+		if rowSchedule == sql.ErrNoRows {
+			file.WriteString("\n- <code>" + username + "</code> siapa tuh? 👻")
+		} else {
+			countDone++
+			_, err := db.Exec("UPDATE bandung_snack SET status='sudah', from_id='" + strconv.Itoa(id) + "', count=" + strconv.Itoa(countDone) + " WHERE name='@" + username + "' and day='" + strings.ToLower(helper.DayNow()) + "' and status='belum'")
+			helper.ErrorMessage(err)
+
+			file.WriteString("\nSelamat menggendutkan diri, kawan-kawan\n😈")
+		}
 	}
 }

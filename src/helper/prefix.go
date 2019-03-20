@@ -79,3 +79,7 @@ func PrefixCommandDeleteAdminSnack() string {
 func PrefixCommandListAdminSnack() string {
 	return "/list_admin"
 }
+
+func PrefixCommandBaikSnack() string {
+	return "/baik"
+}

@@ -27,4 +27,5 @@ func GSnack() {
 	MatchAddAdminSnack()
 	MatchDeleteAdminSnack()
 	MatchListAdminSnack()
+	MatchBaikSnack()
 }

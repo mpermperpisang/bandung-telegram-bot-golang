@@ -13,10 +13,10 @@ func Snack() string {
 		"1. Add people to snack schedule (BOTH)\n" +
 		"<b>/add_snack@" + botName + " day1 @username day2 @username day3 @username</b>\n\n" +
 
-		"2. Change people schedule TEMPORARILY (BOTH)\n" +
+		"2. Change people schedule <code>TEMPORARILY</code> (BOTH)\n" +
 		"<b>/move@" + botName + " day1 @username day2 @username day3 @username</b>\n\n" +
 
-		"3. Change snack schedule PERMANENTLY (BOTH)\n" +
+		"3. Change snack schedule <code>PERMANENTLY</code> (BOTH)\n" +
 		"<b>/permanent@" + botName + " day1 @username day2 @username day3 @username</b>\n\n" +
 
 		"4. Delete people from schedule (BOTH)\n" +
@@ -42,6 +42,9 @@ func Snack() string {
 		"10. See the list of admin snack (BOTH)\n" +
 		"<b>/list_admin@" + botName + "</b>\n\n" +
 
-		"🐾 Only admin/managers can do add, edit, change, " +
+		"11. See the kindest person (BOTH)\n" +
+		"<b>/baik@" + botName + "</b>\n\n" +
+
+		"🐾 Only admins can do add, edit, change, " +
 		"delete & holiday 😎"
 }

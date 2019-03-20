@@ -32,7 +32,7 @@ func PermanentSnack() string {
 		database.PermanentSnack(snack)
 
 		if snack != "" {
-			contentMessage = message.PermanentSnack(snack, firstName)
+			contentMessage = message.PermanentSnack(snack, userName)
 		} else {
 			contentMessage = message.EmptyDayUsername(userName, baseCommand)
 		}

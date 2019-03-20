@@ -74,7 +74,7 @@ func DoneSnack(username, first_name string) string {
 	if strings.Contains(content, "menggendutkan") {
 		header = "Yeay dapat cemilan dari Kak @" + username + ""
 	} else {
-		header = "Nge-done-in siapa sih, Kak " + first_name + "? 😵\n"
+		header = "Nge-done-in siapa sih, Kak " + first_name + "? Kan udah bawa snack 😵\n"
 	}
 
 	return header + content
@@ -136,7 +136,7 @@ func DeleteAdminSnack(snack, username string) string {
 	if strings.Contains(content, "dihapus") {
 		header = "Yaah berkurang deh adminnya, Kak @" + username + "\n"
 	} else {
-		header = "Ngehapus siapa sih, Kak @" + username + "? 😵\n"
+		header = "Ngehapus admin siapa sih, Kak @" + username + "? 😵\n"
 	}
 
 	return header + content
@@ -152,6 +152,21 @@ func ListAdminSnack(username string) string {
 		header = "Berikut adalah daftar list admin snack, Kak @" + username + "\n"
 	} else {
 		header = "Maaf Kak @" + username + " belum ada list admin snack\n"
+	}
+
+	return header + content
+}
+
+func BaikSnack(username string) string {
+	var header string
+
+	data, _ := ioutil.ReadFile("temp.go")
+	content := string(data)
+
+	if content != "" {
+		header = "Berikut adalah Kakak yang baik hati sering berbagi snack\n\n"
+	} else {
+		header = "Maaf Kak @" + username + " belum ada list Kakak yang baik hati\n"
 	}
 
 	return header + content
