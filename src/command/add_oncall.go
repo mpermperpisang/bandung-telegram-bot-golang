@@ -34,6 +34,7 @@ func MatchAddOnCall() string {
 
 func AddOnCall() string {
 	var content, oncall string
+	var oncallArray []string
 
 	var column = -1
 	var sheet = helper.GoogleSheet(os.Getenv("SPREADSHEET_ONCALL"))
@@ -51,10 +52,18 @@ func AddOnCall() string {
 			pattern := regexp.MustCompile(helper.RegexCompileUsername())
 			backend := pattern.FindAllString(textMsg, -1)
 
+			for _, username := range backend {
+				includeUsername, _ := helper.IncludeArray(username, oncallArray)
+
+				if !includeUsername {
+					oncallArray = append(oncallArray, username)
+				}
+			}
+
 			for row := 1; row <= 12; row++ {
 				lastday := time.Date(year, time.Month(row+1), 0, 0, 0, 0, 0, time.UTC)
 				enddate, _ := strconv.Atoi(lastday.Format("02"))
-				index := rand.Perm(len(backend))
+				index := rand.Perm(len(oncallArray))
 
 				for x := 0; x < 5; x++ {
 					for _, match := range index {
@@ -75,7 +84,7 @@ func AddOnCall() string {
 								}
 
 								if column < enddate {
-									content = backend[match]
+									content = oncallArray[match]
 
 									sheet.Update(column, row-1, content)
 								}

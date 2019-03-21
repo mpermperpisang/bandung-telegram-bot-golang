@@ -21,7 +21,7 @@ func AddStaging(staging string) {
 		includeStaging, _ := helper.IncludeArray(list, stgArray)
 
 		if !includeStaging {
-			_, err := db.Exec("INSERT INTO booking_staging VALUES ('" + list + "', 'book', '0', 'book', 'done', '" + stgSquad + "')")
+			_, err := db.Exec("INSERT INTO booking_staging VALUES ('" + list + "', 'BookByUsername', '0', 'Branch', 'done', '" + stgSquad + "')")
 			helper.ErrorMessage(err)
 
 			if err != nil {
