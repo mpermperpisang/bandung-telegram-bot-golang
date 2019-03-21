@@ -21,7 +21,7 @@ func HolidaySnack(snack string) {
 
 	for _, username := range listUsername {
 		includeSnack, _ := helper.IncludeArray(username, snackArray)
-		listSchedule := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + username + "'").Scan(&count)
+		listSchedule := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + username + "' and day='" + strings.ToLower(helper.DayNow()) + "'").Scan(&count)
 
 		if !includeSnack {
 			if username == "@all" {

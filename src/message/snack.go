@@ -106,7 +106,8 @@ func HolidaySnack(snack, username string) string {
 	} else if strings.Contains(content, "Selamat") {
 		header = ""
 	} else {
-		header = "Ngeliburin siapa sih, Kak @" + username + "? 😵\n"
+		header = "Ngeliburin siapa sih, Kak @" + username + "? 😵\n" +
+			"Hanya bisa ngeliburan orang yang jadwalnya hari ini ajah soale\n"
 	}
 
 	return header + content
