@@ -23,6 +23,7 @@ func NewOnboarding(text, username string) string {
 		contentMessage = message.InvalidOnboarding()
 	} else {
 		database.UpdateOnboarding(username)
+
 		contentMessage = message.ValidOnboarding()
 	}
 

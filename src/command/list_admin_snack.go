@@ -11,7 +11,7 @@ import (
 func MatchListAdminSnack() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandListAdminSnack())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = ListAdminSnack
 	} else {
 		return contentMessage

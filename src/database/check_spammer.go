@@ -16,10 +16,10 @@ func CheckSpammer(username, command string) bool {
 	if admin {
 		attempt = 25
 	} else {
-		attempt = 5
+		attempt = 3
 	}
 
-	row := db.QueryRow("SELECT * FROM bot_spam WHERE spammer_name='" + username + "' and bot_command='" + command + "' and bot_attempt>" + strconv.Itoa(attempt) + "").Scan(&count)
+	row := db.QueryRow("SELECT * FROM bot_spam WHERE spammer_name='" + username + "' and bot_command='" + command + "' and bot_attempt>=" + strconv.Itoa(attempt) + "").Scan(&count)
 
 	if row == sql.ErrNoRows {
 		return false

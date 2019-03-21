@@ -12,12 +12,11 @@ func CheckAdmin(username string) bool {
 
 	db := DBConnection()
 	file := helper.CreateFile()
+	listAdmin := db.QueryRow("SELECT * FROM admin_snack WHERE adm_username='@" + username + "'").Scan(&count)
 
 	defer file.Close()
 
-	row := db.QueryRow("SELECT * FROM admin_snack WHERE adm_username='@" + username + "'").Scan(&count)
-
-	if row == sql.ErrNoRows {
+	if listAdmin == sql.ErrNoRows {
 		return false
 	} else {
 		return true

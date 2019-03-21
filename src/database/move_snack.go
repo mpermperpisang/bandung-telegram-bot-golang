@@ -23,10 +23,9 @@ func MoveSnack(snack string) {
 		snackDay := regexp.MustCompile(helper.RegexCompileSnackDay()).FindString(list)
 		snackUsername := regexp.MustCompile(helper.RegexCompileUsername()).FindString(list)
 		includeSnack, _ := helper.IncludeArray(snackUsername, snackArray)
+		row := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + snackUsername + "'").Scan(&count)
 
 		if !includeSnack {
-			row := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + snackUsername + "'").Scan(&count)
-
 			if row != sql.ErrNoRows {
 				_, err := db.Exec("UPDATE bandung_snack SET day='" + strings.Trim(snackDay, " ") + "' WHERE name='" + snackUsername + "'")
 				helper.ErrorMessage(err)

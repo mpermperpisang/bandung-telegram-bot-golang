@@ -12,7 +12,7 @@ import (
 func MatchCancelSnack() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandCancelSnack())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = CancelSnack
 	} else {
 		return "not match"

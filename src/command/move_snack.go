@@ -12,7 +12,7 @@ import (
 func MatchMoveSnack() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandMoveSnack())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = MoveSnack
 	} else {
 		return "not match"

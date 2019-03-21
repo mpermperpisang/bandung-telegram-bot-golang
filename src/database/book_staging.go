@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/bandung-telegram-bot-golang/src/helper"
+	"github.com/bandung-telegram-bot-golang/src/message"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -17,21 +18,19 @@ func BookStaging(staging, username string, user_id int) {
 	db := DBConnection()
 	file := helper.CreateFile()
 	stgNumber := regexp.MustCompile(helper.RegexCompileStatusStaging()).FindString(staging)
-
-	defer file.Close()
-
 	stgList := strings.Trim(stgNumber, " ")
 	stgCount := db.QueryRow("SELECT * FROM booking_staging WHERE book_staging='" + stgList + "'").Scan(&count)
 	bookCount := db.QueryRow("SELECT * FROM booking_staging WHERE book_staging='" + stgList + "' and book_name='" + username + "' and book_status='booked'").Scan(&count)
 	doneCount := db.QueryRow("SELECT * FROM booking_staging WHERE book_staging='" + stgList + "' and book_status='done'").Scan(&count)
-	doneExist, err := db.Query("SELECT book_name FROM booking_staging WHERE book_staging='" + stgList + "'")
-	helper.ErrorMessage(err)
+	doneExist, _ := db.Query("SELECT book_name FROM booking_staging WHERE book_staging='" + stgList + "'")
+
+	defer file.Close()
 
 	if stgCount != sql.ErrNoRows {
 		if bookCount == sql.ErrNoRows {
 			if doneCount == sql.ErrNoRows {
 				for doneExist.Next() {
-					err = doneExist.Scan(&userBook)
+					err := doneExist.Scan(&userBook)
 					helper.ErrorMessage(err)
 
 					file.WriteString("<b>staging" + stgList + ".vm</b> masih dibooking sama Kak @" + userBook + "")
@@ -46,6 +45,6 @@ func BookStaging(staging, username string, user_id int) {
 			file.WriteString("Kamu masih booking <b>staging" + stgList + ".vm</b> kok, Kak 😊")
 		}
 	} else {
-		file.WriteString("\nContoh : <code>/add_staging squad_name staging_number1 staging_number2 staging_number3</code> dan seterusnya")
+		file.WriteString(message.ExampleCommandStaging("/add_staging"))
 	}
 }

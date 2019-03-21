@@ -11,7 +11,7 @@ import (
 func MatchUpdateStaging() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandUpdateStaging())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = UpdateStaging
 	} else {
 		return "not match"

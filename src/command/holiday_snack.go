@@ -12,7 +12,7 @@ import (
 func MatchHolidaySnack() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandHolidaySnack())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = HolidaySnack
 	} else {
 		return "not match"

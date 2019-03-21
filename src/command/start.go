@@ -10,10 +10,10 @@ import (
 func MatchStart() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandStart())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = Start
 	} else {
-		return "failed"
+		return "not match"
 	}
 
 	return GoToFunc()

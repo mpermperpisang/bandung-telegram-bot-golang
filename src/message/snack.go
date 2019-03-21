@@ -74,7 +74,7 @@ func DoneSnack(username, first_name string) string {
 	if strings.Contains(content, "menggendutkan") {
 		header = "Yeay dapat cemilan dari Kak @" + username + ""
 	} else {
-		header = "Nge-done-in siapa sih, Kak " + first_name + "? Kan udah bawa snack 😵\n"
+		header = "Nge-done-in siapa sih, Kak " + first_name + "? 😵\n"
 	}
 
 	return header + content

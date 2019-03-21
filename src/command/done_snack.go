@@ -11,7 +11,7 @@ import (
 func MatchDoneSnack() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandDoneSnack())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = DoneSnack
 	} else {
 		return "not match"

@@ -14,16 +14,16 @@ import (
 
 func MatchAddOnCall() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandAddOnCall())
+	admin := []string{os.Getenv("ADMIN1"), os.Getenv("ADMIN2"), os.Getenv("ADMIN3"), os.Getenv("ADMIN4")}
+	includeAdmin, _ := helper.IncludeArray("@"+userName, admin)
 
-	if pattern == true {
-		admin := []string{os.Getenv("ADMIN1"), os.Getenv("ADMIN2"), os.Getenv("ADMIN3"), os.Getenv("ADMIN4")}
-		includeAdmin, _ := helper.IncludeArray("@"+userName, admin)
-
+	if pattern {
 		if includeAdmin {
 			GoToFunc = AddOnCall
 		} else {
 			contentMessage = message.OncallAdmin(userName, baseCommand, admin)
-			return contentMessage
+			sendTo = sendToPrivate
+			return "not admin"
 		}
 	} else {
 		return "not match"
@@ -34,6 +34,7 @@ func MatchAddOnCall() string {
 
 func AddOnCall() string {
 	var content, oncall string
+
 	var column = -1
 	var sheet = helper.GoogleSheet(os.Getenv("SPREADSHEET_ONCALL"))
 

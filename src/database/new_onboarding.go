@@ -12,7 +12,6 @@ func NewOnboarding(username string) bool {
 	var count int
 
 	db := DBConnection()
-
 	rowCount := db.QueryRow("SELECT on_flag from onboarding_member where on_username='@" + username + "'").Scan(&count)
 	row, err := db.Query("SELECT on_flag from onboarding_member where on_username='@" + username + "'")
 	helper.ErrorMessage(err)

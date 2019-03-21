@@ -9,7 +9,7 @@ import (
 )
 
 func SaveSpammer(username, command string) {
-	var count, attempt, sumAttempt int
+	var count, attempt int
 
 	db := DBConnection()
 
@@ -22,7 +22,7 @@ func SaveSpammer(username, command string) {
 		err = countAttempt.Scan(&attempt)
 		helper.ErrorMessage(err)
 
-		sumAttempt = attempt + 1
+		attempt++
 	}
 
 	if rowCommand == sql.ErrNoRows {
@@ -30,6 +30,6 @@ func SaveSpammer(username, command string) {
 	} else if rowUsername == sql.ErrNoRows {
 		db.Exec("UPDATE bot_spam SET bot_attempt=1, spammer_name='" + username + "'  WHERE bot_command='" + command + "'")
 	} else {
-		db.Exec("UPDATE bot_spam SET bot_attempt=" + strconv.Itoa(sumAttempt) + " WHERE spammer_name='" + username + "'  and bot_command='" + command + "'")
+		db.Exec("UPDATE bot_spam SET bot_attempt=" + strconv.Itoa(attempt) + " WHERE spammer_name='" + username + "'  and bot_command='" + command + "'")
 	}
 }

@@ -47,7 +47,6 @@ func StatusStaging(staging string) {
 			}
 
 			stgArray = append(stgArray, list)
-
 			err = rows.Err()
 			helper.ErrorMessage(err)
 		}

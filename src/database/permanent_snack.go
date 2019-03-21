@@ -25,8 +25,9 @@ func PermanentSnack(snack string) {
 		includeSnack, _ := helper.IncludeArray(snackUsername, snackArray)
 
 		if !includeSnack {
-			row := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + snackUsername + "'").Scan(&count)
-			if row != sql.ErrNoRows {
+			listUsername := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + snackUsername + "'").Scan(&count)
+
+			if listUsername != sql.ErrNoRows {
 				_, err := db.Exec("UPDATE bandung_snack SET fix_day='" + strings.Trim(snackDay, " ") + "', day='" + strings.Trim(snackDay, " ") + "' WHERE name='" + snackUsername + "'")
 				helper.ErrorMessage(err)
 

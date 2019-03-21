@@ -12,7 +12,7 @@ import (
 func MatchBaikSnack() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandBaikSnack())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = BaikSnack
 	} else {
 		return contentMessage

@@ -12,7 +12,7 @@ import (
 func MatchPermanentSnack() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandPermanentSnack())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = PermanentSnack
 	} else {
 		return "not match"

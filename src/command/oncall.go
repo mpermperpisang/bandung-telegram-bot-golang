@@ -13,7 +13,7 @@ import (
 func MatchOnCall() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandOnCall())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = OnCall
 	} else {
 		return "not match"

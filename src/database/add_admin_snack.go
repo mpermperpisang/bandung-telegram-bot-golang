@@ -16,9 +16,9 @@ func AddAdminSnack(username string) {
 	defer file.Close()
 
 	for _, username := range listUsername {
-		includeSnack, _ := helper.IncludeArray(username, snackArray)
+		includeUsername, _ := helper.IncludeArray(username, snackArray)
 
-		if !includeSnack {
+		if !includeUsername {
 			_, err := db.Exec("INSERT INTO admin_snack (adm_username) VALUES ('" + username + "')")
 			helper.ErrorMessage(err)
 

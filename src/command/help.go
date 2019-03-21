@@ -11,10 +11,10 @@ import (
 func MatchHelp() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandHelp())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = Help
 	} else {
-		return "failed"
+		return "not match"
 	}
 
 	return GoToFunc()

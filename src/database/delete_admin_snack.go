@@ -22,9 +22,9 @@ func DeleteAdminSnack(username string) {
 		includeSnack, _ := helper.IncludeArray(username, snackArray)
 
 		if !includeSnack {
-			row := db.QueryRow("SELECT * FROM admin_snack WHERE adm_username='" + username + "'").Scan(&count)
+			listAdmin := db.QueryRow("SELECT * FROM admin_snack WHERE adm_username='" + username + "'").Scan(&count)
 
-			if row != sql.ErrNoRows {
+			if listAdmin != sql.ErrNoRows {
 				_, err := db.Exec("DELETE FROM admin_snack WHERE adm_username='" + username + "'")
 				helper.ErrorMessage(err)
 

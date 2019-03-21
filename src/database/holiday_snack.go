@@ -21,6 +21,7 @@ func HolidaySnack(snack string) {
 
 	for _, username := range listUsername {
 		includeSnack, _ := helper.IncludeArray(username, snackArray)
+		listSchedule := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + username + "'").Scan(&count)
 
 		if !includeSnack {
 			if username == "@all" {
@@ -29,9 +30,7 @@ func HolidaySnack(snack string) {
 
 				file.WriteString("\nSelamat hari libur berjamaah, Kak")
 			} else {
-				row := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + username + "'").Scan(&count)
-
-				if row != sql.ErrNoRows {
+				if listSchedule != sql.ErrNoRows {
 					_, err := db.Exec("UPDATE bandung_snack SET status='libur' WHERE name='" + username + "'")
 					helper.ErrorMessage(err)
 

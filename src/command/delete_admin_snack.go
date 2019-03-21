@@ -12,7 +12,7 @@ import (
 func MatchDeleteAdminSnack() string {
 	pattern := strings.HasPrefix(textMsg, helper.PrefixCommandDeleteAdminSnack())
 
-	if pattern == true {
+	if pattern {
 		GoToFunc = DeleteAdminSnack
 	} else {
 		return "not match"

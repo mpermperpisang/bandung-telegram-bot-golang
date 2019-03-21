@@ -1,6 +1,7 @@
 package database
 
 import (
+	"database/sql"
 	"regexp"
 
 	"github.com/bandung-telegram-bot-golang/src/helper"
@@ -9,6 +10,7 @@ import (
 
 func UpdateStaging(staging string) {
 	var stgArray []string
+	var count int
 
 	db := DBConnection()
 	file := helper.CreateFile()
@@ -23,10 +25,16 @@ func UpdateStaging(staging string) {
 		includeStaging, _ := helper.IncludeArray(list, stgArray)
 
 		if !includeStaging {
-			_, err := db.Exec("UPDATE booking_staging SET book_squad='" + stgSquad + "' WHERE book_staging='" + list + "'")
-			helper.ErrorMessage(err)
+			rowStaging := db.QueryRow("SELECT * FROM booking_staging WHERE book_staging='" + list + "'").Scan(&count)
 
-			file.WriteString("\n- staging" + list + ".vm")
+			if rowStaging == sql.ErrNoRows {
+				file.WriteString("\n- staging" + list + ".vm tidak ditemukan")
+			} else {
+				_, err := db.Exec("UPDATE booking_staging SET book_squad='" + stgSquad + "' WHERE book_staging='" + list + "'")
+				helper.ErrorMessage(err)
+
+				file.WriteString("\n- staging" + list + ".vm berhasil diubah")
+			}
 
 			stgArray = append(stgArray, list)
 		}

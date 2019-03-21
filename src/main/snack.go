@@ -94,6 +94,7 @@ func main() {
 		} else if m.Private() && !database.NewOnboarding(m.Sender.Username) {
 			content := command.NewOnboarding(m.Text, m.Sender.Username)
 			bot.Send(m.Sender, content, tb.ModeHTML)
+
 			if strings.Contains(content, "selanjutnya") {
 				bot.Send(postToGroup, message.OnboardingSuccess(m.Text, m.Sender.Username), tb.ModeHTML)
 			}
