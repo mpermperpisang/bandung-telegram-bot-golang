@@ -59,7 +59,7 @@ func AskSnack() string {
 			sendToUser := &userIDSnack{scanner.Text()}
 			fmt.Println(sendToUser)
 
-			bot.Send(sendToUser, contentMessage)
+			bot.Send(sendToUser, contentMessage, telebot.ModeHTML)
 		}
 	} else {
 		contentMessage = message.EmptyAskSnack(userName, baseCommand)
