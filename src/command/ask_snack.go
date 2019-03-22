@@ -60,13 +60,13 @@ func AskSnack() string {
 			fmt.Println(sendToUser)
 
 			bot.Send(sendToUser, contentMessage, telebot.ModeHTML)
-			contentMessage = message.AskingSnack(userName)
-			sendTo = sendToPrivate
 		}
+		contentMessage = message.AskingSnack(userName)
 	} else {
 		contentMessage = message.EmptyAskSnack(userName, baseCommand)
-		sendTo = sendToPrivate
 	}
+
+	sendTo = sendToPrivate
 
 	return "success"
 }
