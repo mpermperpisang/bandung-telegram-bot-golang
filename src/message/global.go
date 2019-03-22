@@ -36,3 +36,8 @@ func EmptyUsername(username, command string) string {
 	return "Commandnya belum benar, Kak @" + username + "\n" +
 		"Contoh : <code>" + command + " @username1 @username2 @username3</code> dan seterusnya"
 }
+
+func EmptyAskSnack(username, command string) string {
+	return "Mau nanya snack yang mana, Kak @" + username + "?\n" +
+		"Contoh : <code>" + command + " snack_name1 snack_name2 snack_name3</code> dan seterusnya"
+}

@@ -172,3 +172,18 @@ func BaikSnack(username string) string {
 
 	return header + content
 }
+
+func AskSnack(username, text string) string {
+	var header string
+
+	data, _ := ioutil.ReadFile("temp.go")
+	content := string(data)
+
+	if content != "" {
+		header = "Hi Kak. Kak @" + username + " nanya snack<b>" + text + "</b> siapa yang beli dan dimana yaa? Enak cenah 😍😍😍"
+	} else {
+		header = "Belum ada yang bawa snack"
+	}
+
+	return header
+}

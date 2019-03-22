@@ -83,3 +83,7 @@ func PrefixCommandListAdminSnack() string {
 func PrefixCommandBaikSnack() string {
 	return "/baik"
 }
+
+func PrefixCommandAskSnack() string {
+	return "/ask"
+}

@@ -45,6 +45,9 @@ func Snack() string {
 		"11. See the kindest person (BOTH)\n" +
 		"<b>/baik@" + botName + "</b>\n\n" +
 
+		"12. If you like the snack and want to buy, ask people (BOTH)\n" +
+		"<b>/ask@" + botName + "</b> snack_name1 snack_name2 snack_name3\n\n" +
+
 		"🐾 Only admins can do add, edit, change, " +
 		"delete & holiday 😎"
 }

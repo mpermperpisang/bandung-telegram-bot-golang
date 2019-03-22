@@ -12,3 +12,10 @@ func CheckEmptyDayUsername(text string) string {
 
 	return snack
 }
+
+func CheckEmptyAskSnack(text string) string {
+	pattern := regexp.MustCompile(RegexCompileAskSnack())
+	snack = pattern.FindString(text)
+
+	return snack
+}

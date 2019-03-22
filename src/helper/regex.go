@@ -67,3 +67,7 @@ func RegexCompileHobby() string {
 func RegexCompileMotto() string {
 	return `(.*(Motto :).*[a-zA-Z])`
 }
+
+func RegexCompileAskSnack() string {
+	return `\s[a-zA-Z].+`
+}
