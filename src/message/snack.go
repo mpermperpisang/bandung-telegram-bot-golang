@@ -180,7 +180,8 @@ func AskSnack(username, text string) string {
 	content := string(data)
 
 	if content != "" {
-		header = "Hi Kak. Kak @" + username + " nanya snack<b>" + text + "</b> siapa yang beli dan dimana yaa? Enak cenah 😍😍😍"
+		header = "Hi Kak.\nKak @" + username + " nanya snack<b>" + text + "</b> siapa yang beli dan dimana yaa? Enak cenah 😍😍😍" +
+			"Tolong kabari langsung ke yg nanya yaa 😘"
 	} else {
 		header = "Belum ada yang bawa snack"
 	}
