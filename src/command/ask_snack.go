@@ -57,6 +57,7 @@ func AskSnack() string {
 
 		for scanner.Scan() {
 			sendToUser := &userIDSnack{scanner.Text()}
+			fmt.Println(sendToUser)
 
 			bot.Send(sendToUser, contentMessage)
 		}
