@@ -41,3 +41,7 @@ func EmptyAskSnack(username, command string) string {
 	return "Mau nanya snack yang mana, Kak @" + username + "?\n" +
 		"Contoh : <code>" + command + " snack_name1 snack_name2 snack_name3</code> dan seterusnya"
 }
+
+func AskingSnack(username string) string {
+	return "Sedang ditanyakan ke Kakak-kakak yang sudah bawa snack hari ini yaa, Kak @" + username + ". Tunggu response dari mereka"
+}
