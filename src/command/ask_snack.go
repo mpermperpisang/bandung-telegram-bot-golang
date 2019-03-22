@@ -44,10 +44,10 @@ func AskSnack() string {
 
 	snack = helper.CheckEmptyAskSnack(textMsg)
 
-	database.AskSnack(userName)
-
-	if snack != "" {
-		contentMessage = message.AskSnack(userName, snack)
+	if strings.Trim(snack, " ") == "" {
+		bot.Send(sendToPrivate, message.EmptyAskSnack(userName, baseCommand), telebot.ModeHTML)
+	} else {
+		database.AskSnack(userName)
 
 		file, err := os.Open("temp.go")
 		helper.ErrorMessage(err)
@@ -59,13 +59,12 @@ func AskSnack() string {
 			sendToUser := &userIDSnack{scanner.Text()}
 			fmt.Println(sendToUser)
 
-			bot.Send(sendToUser, contentMessage, telebot.ModeHTML)
+			bot.Send(sendToUser, message.AskSnack(userName, snack), telebot.ModeHTML)
 		}
 		bot.Send(sendToPrivate, message.AskingSnack(userName), telebot.ModeHTML)
-	} else {
-		contentMessage = message.EmptyAskSnack(userName, baseCommand)
-		sendTo = sendToPrivate
 	}
+
+	contentMessage = ""
 
 	return "success"
 }
