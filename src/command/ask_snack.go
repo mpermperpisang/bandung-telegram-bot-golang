@@ -61,7 +61,7 @@ func AskSnack() string {
 
 			bot.Send(sendToUser, message.AskSnack(userName, snack), telebot.ModeHTML)
 		}
-		bot.Send(sendToPrivate, message.AskingSnack(userName), telebot.ModeHTML)
+		bot.Send(msg.Chat, message.AskingSnack(userName), telebot.ModeHTML)
 	}
 
 	contentMessage = ""
