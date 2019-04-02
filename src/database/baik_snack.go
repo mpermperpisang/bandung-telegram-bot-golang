@@ -13,7 +13,7 @@ func BaikSnack(username string) {
 
 	defer file.Close()
 
-	listBaik, _ := db.Query("SELECT name, count FROM bandung_snack WHERE count<>0 ORDER BY count DESC LIMIT 10;")
+	listBaik, _ := db.Query("SELECT name, count FROM bandung_snack WHERE count<>0 ORDER BY count DESC LIMIT 25;")
 
 	for listBaik.Next() {
 		err := listBaik.Scan(&name, &count)
