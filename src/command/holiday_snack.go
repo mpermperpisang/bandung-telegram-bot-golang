@@ -40,7 +40,7 @@ func HolidaySnack() string {
 		contentMessage = message.UserAdmin(userName, baseCommand)
 	}
 
-	if strings.Contains(contentMessage, "diliburin") {
+	if strings.Contains(contentMessage, "diliburin") || strings.Contains(contentMessage, "Selamat") {
 		sendTo = sendToGroup
 	} else {
 		sendTo = sendToPrivate
