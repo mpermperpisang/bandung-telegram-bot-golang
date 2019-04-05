@@ -94,7 +94,7 @@ func main() {
 		includeCommand, _ := helper.IncludeArray(baseCommand, commandBot)
 
 		if !m.Private() && !database.NewOnboarding(m.Sender.Username) {
-			bot.Send(postToGroup, "Kak @"+m.Sender.Username+", please japri @"+os.Getenv("BOT_SNACK")+" dulu yaa.. Nuhun")
+			bot.Send(m.Chat, "Kak @"+m.Sender.Username+", please japri @"+os.Getenv("BOT_SNACK")+" dulu yaa.. Nuhun")
 		} else if m.Private() && !database.NewOnboarding(m.Sender.Username) {
 			content := command.NewOnboarding(m.Text, m.Sender.Username)
 			bot.Send(m.Sender, content, tb.ModeHTML)
