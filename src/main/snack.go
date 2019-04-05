@@ -64,6 +64,10 @@ func main() {
 	bot.Send(greetingBotOwner, message.OnlineMessage(FullnameSnack), tb.ModeHTML)
 	// bot.Send(postToGroup, message.OnlineMessage(FullnameSnack), tb.ModeHTML)
 
+	bot.Handle(tb.OnAddedToGroup, func(m *tb.Message) {
+		bot.Send(m.Chat, message.AddedGroup(m.Chat.Title), tb.ModeHTML)
+	})
+
 	bot.Handle(tb.OnUserJoined, func(m *tb.Message) {
 		if m.UserJoined.LanguageCode != "" {
 			bot.Send(m.Chat, message.UserJoin(m.Chat.Title, m.UserJoined.Username), tb.ModeHTML)
@@ -75,10 +79,10 @@ func main() {
 	bot.Handle(tb.OnUserLeft, func(m *tb.Message) {
 		if m.UserLeft.LanguageCode != "" {
 			bot.Send(m.Chat, message.UserLeft("@"+m.UserLeft.Username), tb.ModeHTML)
-			bot.Send(m.UserLeft, message.UserLeft(m.UserLeft.FirstName), tb.ModeHTML)
 			database.DeleteAdminSnack("@" + m.UserLeft.Username)
 			database.DeleteSnack("@" + m.UserLeft.Username)
 			database.DeleteOnboarding("@" + m.UserLeft.Username)
+			bot.Send(m.UserLeft, message.UserLeft(m.UserLeft.FirstName), tb.ModeHTML)
 		}
 	})
 
