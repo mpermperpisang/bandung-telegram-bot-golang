@@ -29,5 +29,5 @@ func OncallAdmin(username, command string, admin []string) string {
 
 func AddedGroup(group string) string {
 	return "Halo Kakak-kakak di grup <b>" + group + "</b>\nAsyik grupku bertambah banyak 🥳🥳🥳\n\n" +
-		"Kalau butuh bantuan jangan sungkan ketik /help by private message yaa ☺️"
+		"Kalau butuh bantuan jangan sungkan ketik <b>/help</b> by private message yaa ☺️"
 }
