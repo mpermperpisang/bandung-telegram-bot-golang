@@ -7,6 +7,6 @@ import (
 
 func AddOnboarding(username string) {
 	db := DBConnection()
-	_, err := db.Exec("INSERT INTO onboarding_member (on_username, on_flag) VALUES ('" + username + "', 'false')")
+	_, err := db.Exec("INSERT INTO onboarding_member (on_username) VALUES ('" + username + "')")
 	helper.ErrorMessage(err)
 }

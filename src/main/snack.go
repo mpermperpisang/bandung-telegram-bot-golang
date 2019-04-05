@@ -69,6 +69,7 @@ func main() {
 	})
 
 	bot.Handle(tb.OnUserJoined, func(m *tb.Message) {
+		fmt.Println(m.UserJoined.LanguageCode)
 		if m.UserJoined.LanguageCode != "" {
 			bot.Send(m.Chat, message.UserJoin(m.Chat.Title, m.UserJoined.Username), tb.ModeHTML)
 			database.AddOnboarding("@" + m.UserJoined.Username)
