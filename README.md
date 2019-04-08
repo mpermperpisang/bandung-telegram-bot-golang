@@ -15,4 +15,4 @@ Bot Snack (Go version)
 - Buat refresh bot (kalau ngelag commandnya), silahkan gunakan file snack.go (go run src/refresh_token/snack.rb, kemudian japri Shani dan ketik /hello, lalu kembali ke command nomor 3)
 
 command :
-/help = this will inform you about all of the command that available (private message)
+- /help = this will inform you about all of the command that available (private message)
