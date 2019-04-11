@@ -16,8 +16,6 @@ func DeleteAdminSnack(username string) {
 	file := helper.CreateFile()
 	listUsername := regexp.MustCompile(helper.RegexCompileUsername()).FindAllString(username, -1)
 
-	defer file.Close()
-
 	for _, username := range listUsername {
 		includeSnack, _ := helper.IncludeArray(username, snackArray)
 
@@ -36,4 +34,6 @@ func DeleteAdminSnack(username string) {
 			snackArray = append(snackArray, username)
 		}
 	}
+
+	defer file.Close()
 }

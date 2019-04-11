@@ -51,7 +51,6 @@ func AskSnack() string {
 
 		file, err := os.Open("temp.go")
 		helper.ErrorMessage(err)
-		defer file.Close()
 
 		scanner := bufio.NewScanner(file)
 
@@ -62,6 +61,7 @@ func AskSnack() string {
 			bot.Send(sendToUser, message.AskSnack(userName, snack), telebot.ModeHTML)
 		}
 		bot.Send(msg.Chat, message.AskingSnack(userName), telebot.ModeHTML)
+		defer file.Close()
 	}
 
 	contentMessage = ""

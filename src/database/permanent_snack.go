@@ -17,8 +17,6 @@ func PermanentSnack(snack string) {
 	file := helper.CreateFile()
 	listSchedule := regexp.MustCompile(helper.RegexCompileSnackSchedule()).FindAllString(snack, -1)
 
-	defer file.Close()
-
 	for _, list := range listSchedule {
 		snackDay := regexp.MustCompile(helper.RegexCompileSnackDay()).FindString(list)
 		snackUsername := regexp.MustCompile(helper.RegexCompileUsername()).FindString(list)
@@ -39,4 +37,6 @@ func PermanentSnack(snack string) {
 			snackArray = append(snackArray, snackUsername)
 		}
 	}
+
+	defer file.Close()
 }

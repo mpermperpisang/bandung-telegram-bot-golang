@@ -15,8 +15,6 @@ func AddStaging(staging string) {
 	stgNumber := regexp.MustCompile(helper.RegexCompileStagingNumber()).FindAllString(staging, -1)
 	stgSquad := regexp.MustCompile(helper.RegexCompileStagingSquad()).FindString(staging)
 
-	defer file.Close()
-
 	for _, list := range stgNumber {
 		includeStaging, _ := helper.IncludeArray(list, stgArray)
 
@@ -33,4 +31,6 @@ func AddStaging(staging string) {
 			stgArray = append(stgArray, list)
 		}
 	}
+
+	defer file.Close()
 }

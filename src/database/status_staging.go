@@ -16,8 +16,6 @@ func StatusStaging(staging string) {
 	file := helper.CreateFile()
 	stg := regexp.MustCompile(helper.RegexCompileStatusStaging()).FindAllString(staging, -1)
 
-	defer file.Close()
-
 	for _, list := range stg {
 		includeStaging, _ := helper.IncludeArray(list, stgArray)
 
@@ -51,4 +49,6 @@ func StatusStaging(staging string) {
 			helper.ErrorMessage(err)
 		}
 	}
+
+	defer file.Close()
 }

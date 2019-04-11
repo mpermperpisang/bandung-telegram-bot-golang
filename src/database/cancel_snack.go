@@ -16,8 +16,6 @@ func CancelSnack(snack string) {
 	file := helper.CreateFile()
 	listUsername := regexp.MustCompile(helper.RegexCompileUsername()).FindAllString(snack, -1)
 
-	defer file.Close()
-
 	for _, username := range listUsername {
 		includeSnack, _ := helper.IncludeArray(username, snackArray)
 
@@ -36,4 +34,6 @@ func CancelSnack(snack string) {
 			snackArray = append(snackArray, username)
 		}
 	}
+
+	defer file.Close()
 }

@@ -21,11 +21,11 @@ func DoneStaging(staging, first_name string, user_id int) {
 	_, err := db.Exec("UPDATE booking_staging SET book_status='done' WHERE book_staging='" + stgList + "'")
 	helper.ErrorMessage(err)
 
-	defer file.Close()
-
 	if err != nil || row == sql.ErrNoRows {
 		file.WriteString(message.ExampleCommandStaging("/add_staging"))
 	} else {
 		file.WriteString("<b>staging" + stgList + ".vm</b>")
 	}
+
+	defer file.Close()
 }

@@ -24,8 +24,6 @@ func BookStaging(staging, username string, user_id int) {
 	doneCount := db.QueryRow("SELECT * FROM booking_staging WHERE book_staging='" + stgList + "' and book_status='done'").Scan(&count)
 	doneExist, _ := db.Query("SELECT book_name FROM booking_staging WHERE book_staging='" + stgList + "'")
 
-	defer file.Close()
-
 	if stgCount != sql.ErrNoRows {
 		if bookCount == sql.ErrNoRows {
 			if doneCount == sql.ErrNoRows {
@@ -47,4 +45,6 @@ func BookStaging(staging, username string, user_id int) {
 	} else {
 		file.WriteString(message.ExampleCommandStaging("/add_staging"))
 	}
+
+	defer file.Close()
 }

@@ -17,8 +17,6 @@ func HolidaySnack(snack string) {
 	file := helper.CreateFile()
 	listUsername := regexp.MustCompile(helper.RegexCompileUsername()).FindAllString(snack, -1)
 
-	defer file.Close()
-
 	for _, username := range listUsername {
 		includeSnack, _ := helper.IncludeArray(username, snackArray)
 		listSchedule := db.QueryRow("SELECT * FROM bandung_snack WHERE name='" + username + "' and day='" + strings.ToLower(helper.DayNow()) + "'").Scan(&count)
@@ -43,4 +41,6 @@ func HolidaySnack(snack string) {
 			snackArray = append(snackArray, username)
 		}
 	}
+
+	defer file.Close()
 }

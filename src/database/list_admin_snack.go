@@ -12,12 +12,12 @@ func ListAdminSnack() {
 	file := helper.CreateFile()
 	listAdmin, err := db.Query("SELECT adm_username FROM admin_snack")
 
-	defer file.Close()
-
 	for listAdmin.Next() {
 		err = listAdmin.Scan(&adminUsername)
 		helper.ErrorMessage(err)
 
 		file.WriteString("- <code>" + adminUsername + "</code>\n")
 	}
+
+	defer file.Close()
 }
