@@ -12,6 +12,7 @@ func AskSnack(username string) {
 
 	db := DBConnection()
 	file := helper.CreateFile()
+	defer file.Close()
 	listDone, err := db.Query("SELECT from_id FROM bandung_snack WHERE day='" + strings.ToLower(helper.DayNow()) + "' and status='sudah' and name<>'@" + username + "'")
 
 	for listDone.Next() {
@@ -20,6 +21,4 @@ func AskSnack(username string) {
 
 		file.WriteString(userSnackID + "\n")
 	}
-
-	defer file.Close()
 }

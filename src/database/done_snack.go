@@ -14,6 +14,7 @@ func DoneSnack(username string, id int) {
 
 	db := DBConnection()
 	file := helper.CreateFile()
+	defer file.Close()
 	snackCount, _ := db.Query("SELECT count FROM bandung_snack WHERE name='@" + username + "' and day='" + strings.ToLower(helper.DayNow()) + "' and status='belum'")
 	rowSchedule := snackCount.Scan(&count)
 
@@ -31,6 +32,4 @@ func DoneSnack(username string, id int) {
 			file.WriteString("\nSelamat menggendutkan diri, kawan-kawan\n😈")
 		}
 	}
-
-	defer file.Close()
 }

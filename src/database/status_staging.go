@@ -14,6 +14,7 @@ func StatusStaging(staging string) {
 
 	db := DBConnection()
 	file := helper.CreateFile()
+	defer file.Close()
 	stg := regexp.MustCompile(helper.RegexCompileStatusStaging()).FindAllString(staging, -1)
 
 	for _, list := range stg {
@@ -49,6 +50,4 @@ func StatusStaging(staging string) {
 			helper.ErrorMessage(err)
 		}
 	}
-
-	defer file.Close()
 }
