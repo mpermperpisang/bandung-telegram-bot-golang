@@ -70,21 +70,22 @@ func main() {
 
 	bot.Handle(tb.OnUserJoined, func(m *tb.Message) {
 		fmt.Println(m.UserJoined.LanguageCode)
-		if m.UserJoined.LanguageCode != "" {
-			bot.Send(m.Chat, message.UserJoin(m.Chat.Title, m.UserJoined.Username), tb.ModeHTML)
-			database.AddOnboarding("@" + m.UserJoined.Username)
-			bot.Send(m.UserJoined, message.OnboardingUser(m.UserJoined.FirstName, m.UserJoined.LastName), tb.ModeHTML)
-		}
+		// if m.UserJoined.LanguageCode != "" {
+		bot.Send(m.Chat, message.UserJoin(m.Chat.Title, m.UserJoined.Username), tb.ModeHTML)
+		database.AddOnboarding("@" + m.UserJoined.Username)
+		bot.Send(m.UserJoined, message.OnboardingUser(m.UserJoined.FirstName, m.UserJoined.LastName), tb.ModeHTML)
+		// }
 	})
 
 	bot.Handle(tb.OnUserLeft, func(m *tb.Message) {
-		if m.UserLeft.LanguageCode != "" {
-			bot.Send(m.Chat, message.UserLeft("@"+m.UserLeft.Username), tb.ModeHTML)
-			database.DeleteAdminSnack("@" + m.UserLeft.Username)
-			database.DeleteSnack("@" + m.UserLeft.Username)
-			database.DeleteOnboarding("@" + m.UserLeft.Username)
-			bot.Send(m.UserLeft, message.UserLeft(m.UserLeft.FirstName), tb.ModeHTML)
-		}
+		fmt.Println(m.UserLeft.LanguageCode)
+		// if m.UserLeft.LanguageCode != "" {
+		bot.Send(m.Chat, message.UserLeft("@"+m.UserLeft.Username), tb.ModeHTML)
+		database.DeleteAdminSnack("@" + m.UserLeft.Username)
+		database.DeleteSnack("@" + m.UserLeft.Username)
+		database.DeleteOnboarding("@" + m.UserLeft.Username)
+		bot.Send(m.UserLeft, message.UserLeft(m.UserLeft.FirstName), tb.ModeHTML)
+		// }
 	})
 
 	bot.Handle(tb.OnText, func(m *tb.Message) {
