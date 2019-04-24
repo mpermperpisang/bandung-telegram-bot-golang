@@ -15,7 +15,6 @@ func HolidaySnack(snack string) {
 
 	db := DBConnection()
 	file := helper.CreateFile()
-	defer file.Close()
 	listUsername := regexp.MustCompile(helper.RegexCompileUsername()).FindAllString(snack, -1)
 
 	for _, username := range listUsername {
@@ -42,4 +41,6 @@ func HolidaySnack(snack string) {
 			snackArray = append(snackArray, username)
 		}
 	}
+
+	file.Close()
 }

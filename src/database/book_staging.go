@@ -17,7 +17,6 @@ func BookStaging(staging, username string, user_id int) {
 
 	db := DBConnection()
 	file := helper.CreateFile()
-	defer file.Close()
 	stgNumber := regexp.MustCompile(helper.RegexCompileStatusStaging()).FindString(staging)
 	stgList := strings.Trim(stgNumber, " ")
 	stgCount := db.QueryRow("SELECT * FROM booking_staging WHERE book_staging='" + stgList + "'").Scan(&count)
@@ -46,4 +45,6 @@ func BookStaging(staging, username string, user_id int) {
 	} else {
 		file.WriteString(message.ExampleCommandStaging("/add_staging"))
 	}
+
+	file.Close()
 }

@@ -15,7 +15,6 @@ func MoveSnack(snack string) {
 
 	db := DBConnection()
 	file := helper.CreateFile()
-	defer file.Close()
 	listSchedule := regexp.MustCompile(helper.RegexCompileSnackSchedule()).FindAllString(snack, -1)
 
 	for _, list := range listSchedule {
@@ -37,4 +36,6 @@ func MoveSnack(snack string) {
 			snackArray = append(snackArray, snackUsername)
 		}
 	}
+
+	file.Close()
 }

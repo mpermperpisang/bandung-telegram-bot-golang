@@ -10,7 +10,6 @@ func BaikSnack(username string) {
 
 	db := DBConnection()
 	file := helper.CreateFile()
-	defer file.Close()
 	listBaik, _ := db.Query("SELECT name, count FROM bandung_snack WHERE count<>0 ORDER BY count DESC LIMIT 25;")
 
 	for listBaik.Next() {
@@ -19,4 +18,6 @@ func BaikSnack(username string) {
 
 		file.WriteString("- " + name + " bawa snack sebanyak " + count + " kali\n")
 	}
+
+	file.Close()
 }

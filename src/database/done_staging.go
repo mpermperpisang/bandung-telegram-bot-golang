@@ -15,7 +15,6 @@ func DoneStaging(staging, first_name string, user_id int) {
 
 	db := DBConnection()
 	file := helper.CreateFile()
-	defer file.Close()
 	stgNumber := regexp.MustCompile(helper.RegexCompileStatusStaging()).FindString(staging)
 	stgList := strings.Trim(stgNumber, " ")
 	row := db.QueryRow("SELECT book_status FROM booking_staging WHERE book_staging='" + stgList + "'").Scan(&count)
@@ -27,4 +26,6 @@ func DoneStaging(staging, first_name string, user_id int) {
 	} else {
 		file.WriteString("<b>staging" + stgList + ".vm</b>")
 	}
+
+	file.Close()
 }

@@ -30,5 +30,5 @@ func AddAdminSnack(username string) {
 		}
 	}
 
-	defer file.Close()
+	file.Close()
 }
