@@ -11,7 +11,7 @@ func AddStaging(staging string) {
 	var stgArray []string
 
 	db := DBConnection()
-	file := helper.CreateFile()
+	file := helper.OpenFile()
 	stgNumber := regexp.MustCompile(helper.RegexCompileStagingNumber()).FindAllString(staging, -1)
 	stgSquad := regexp.MustCompile(helper.RegexCompileStagingSquad()).FindString(staging)
 
@@ -30,6 +30,6 @@ func AddStaging(staging string) {
 
 			stgArray = append(stgArray, list)
 		}
-		file.Close()
 	}
+	file.Close()
 }

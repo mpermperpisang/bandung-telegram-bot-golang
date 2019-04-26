@@ -10,7 +10,7 @@ func AddAdminSnack(username string) {
 	var snackArray []string
 
 	db := DBConnection()
-	file := helper.CreateFile()
+	file := helper.OpenFile()
 	listUsername := regexp.MustCompile(helper.RegexCompileUsername()).FindAllString(username, -1)
 
 	for _, username := range listUsername {
@@ -28,6 +28,6 @@ func AddAdminSnack(username string) {
 
 			snackArray = append(snackArray, username)
 		}
-		file.Close()
 	}
+	file.Close()
 }

@@ -13,7 +13,7 @@ func DoneSnack(username string, id int) {
 	var count, countDone int
 
 	db := DBConnection()
-	file := helper.CreateFile()
+	file := helper.OpenFile()
 	snackCount, _ := db.Query("SELECT count FROM bandung_snack WHERE name='@" + username + "' and day='" + strings.ToLower(helper.DayNow()) + "' and status='belum'")
 	rowSchedule := snackCount.Scan(&count)
 

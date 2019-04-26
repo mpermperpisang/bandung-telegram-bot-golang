@@ -16,7 +16,7 @@ func BookStaging(staging, username string, user_id int) {
 	var userBook string
 
 	db := DBConnection()
-	file := helper.CreateFile()
+	file := helper.OpenFile()
 	stgNumber := regexp.MustCompile(helper.RegexCompileStatusStaging()).FindString(staging)
 	stgList := strings.Trim(stgNumber, " ")
 	stgCount := db.QueryRow("SELECT * FROM booking_staging WHERE book_staging='" + stgList + "'").Scan(&count)

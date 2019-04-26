@@ -9,7 +9,7 @@ func ListAdminSnack() {
 	var adminUsername string
 
 	db := DBConnection()
-	file := helper.CreateFile()
+	file := helper.OpenFile()
 	listAdmin, err := db.Query("SELECT adm_username FROM admin_snack")
 
 	for listAdmin.Next() {
@@ -17,6 +17,6 @@ func ListAdminSnack() {
 		helper.ErrorMessage(err)
 
 		file.WriteString("- <code>" + adminUsername + "</code>\n")
-		file.Close()
 	}
+	file.Close()
 }

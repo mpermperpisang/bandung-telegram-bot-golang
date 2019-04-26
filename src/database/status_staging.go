@@ -13,7 +13,7 @@ func StatusStaging(staging string) {
 	var stgArray, stgStatus []string
 
 	db := DBConnection()
-	file := helper.CreateFile()
+	file := helper.OpenFile()
 	stg := regexp.MustCompile(helper.RegexCompileStatusStaging()).FindAllString(staging, -1)
 
 	for _, list := range stg {
@@ -48,6 +48,6 @@ func StatusStaging(staging string) {
 			err = rows.Err()
 			helper.ErrorMessage(err)
 		}
-		file.Close()
 	}
+	file.Close()
 }

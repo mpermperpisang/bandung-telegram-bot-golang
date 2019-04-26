@@ -13,7 +13,7 @@ func DeleteAdminSnack(username string) {
 	var count int
 
 	db := DBConnection()
-	file := helper.CreateFile()
+	file := helper.OpenFile()
 	listUsername := regexp.MustCompile(helper.RegexCompileUsername()).FindAllString(username, -1)
 
 	for _, username := range listUsername {
@@ -33,6 +33,6 @@ func DeleteAdminSnack(username string) {
 
 			snackArray = append(snackArray, username)
 		}
-		file.Close()
 	}
+	file.Close()
 }
