@@ -36,7 +36,6 @@ func UpdateStaging(staging string) {
 
 			stgArray = append(stgArray, list)
 		}
+		file.Close()
 	}
-
-	file.Close()
 }

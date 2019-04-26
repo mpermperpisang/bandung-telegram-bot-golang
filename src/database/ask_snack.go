@@ -19,7 +19,6 @@ func AskSnack(username string) {
 		helper.ErrorMessage(err)
 
 		file.WriteString(userSnackID + "\n")
+		file.Close()
 	}
-
-	file.Close()
 }

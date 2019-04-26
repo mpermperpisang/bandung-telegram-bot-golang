@@ -17,7 +17,6 @@ func BaikSnack(username string) {
 		helper.ErrorMessage(err)
 
 		file.WriteString("- " + name + " bawa snack sebanyak " + count + " kali\n")
+		file.Close()
 	}
-
-	file.Close()
 }

@@ -36,7 +36,6 @@ func PermanentSnack(snack string) {
 
 			snackArray = append(snackArray, snackUsername)
 		}
+		file.Close()
 	}
-
-	file.Close()
 }

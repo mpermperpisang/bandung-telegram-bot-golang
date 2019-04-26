@@ -48,7 +48,6 @@ func StatusStaging(staging string) {
 			err = rows.Err()
 			helper.ErrorMessage(err)
 		}
+		file.Close()
 	}
-
-	file.Close()
 }

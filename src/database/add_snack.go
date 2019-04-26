@@ -32,7 +32,6 @@ func AddSnack(snack string) {
 
 			snackArray = append(snackArray, snackUsername)
 		}
+		file.Close()
 	}
-
-	file.Close()
 }

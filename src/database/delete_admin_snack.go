@@ -33,7 +33,6 @@ func DeleteAdminSnack(username string) {
 
 			snackArray = append(snackArray, username)
 		}
+		file.Close()
 	}
-
-	file.Close()
 }

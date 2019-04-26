@@ -17,7 +17,6 @@ func ListAdminSnack() {
 		helper.ErrorMessage(err)
 
 		file.WriteString("- <code>" + adminUsername + "</code>\n")
+		file.Close()
 	}
-
-	file.Close()
 }

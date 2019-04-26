@@ -40,7 +40,6 @@ func HolidaySnack(snack string) {
 
 			snackArray = append(snackArray, username)
 		}
+		file.Close()
 	}
-
-	file.Close()
 }
