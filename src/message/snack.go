@@ -9,7 +9,8 @@ func AddSnack(snack, username string) string {
 	var header string
 
 	data, _ := ioutil.ReadFile("temp.go")
-	content := string(data)
+	content := string(data) + "\n\nCatat juga di <a href='https://bit.ly/2FBKhA4'>CONFLUENCE</a> yaa\n" +
+		"Dan baca juga aturan per-snack-an di link tersebut 🙏🏻"
 
 	if strings.Contains(content, "bawa snack") {
 		header = "Cihuy Kak @" + username + " nambahin jadwal\n"
