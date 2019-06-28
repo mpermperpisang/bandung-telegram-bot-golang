@@ -28,7 +28,7 @@ func DoneSnack(username string, id int) {
 			_, err = db.Exec("UPDATE bandung_snack SET status='sudah', from_id='" + strconv.Itoa(id) + "', count=" + strconv.Itoa(countDone) + " WHERE name='@" + username + "' and day='" + strings.ToLower(helper.DayNow()) + "' and status='belum'")
 			helper.ErrorMessage(err)
 
-			file.WriteString("\nSelamat menggendutkan diri, kawan-kawan\n😈")
+			file.WriteString(" yuk 🍽")
 		}
 	}
 
