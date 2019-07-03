@@ -72,7 +72,7 @@ func DoneSnack(username, first_name string) string {
 	data, _ := ioutil.ReadFile("temp.go")
 	content := string(data)
 
-	if strings.Contains(content, "hoyeay") {
+	if strings.Contains(content, "yuk") {
 		header = "Yeay dapat cemilan dari Kak @" + username + ""
 	} else {
 		header = "Nge-done-in siapa sih, Kak " + first_name + "? 😵\n"
