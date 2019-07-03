@@ -26,7 +26,7 @@ func DoneSnack() string {
 	contentMessage = message.DoneSnack(userName, firstName)
 
 	if strings.Contains(contentMessage, "Yeay") {
-		sendTo = sendToPrivate
+		sendTo = sendToGroup
 	} else {
 		sendTo = sendToPrivate
 	}
