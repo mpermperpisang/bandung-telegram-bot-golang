@@ -6,6 +6,7 @@ import (
 	"github.com/bandung-telegram-bot-golang/src/database"
 	"github.com/bandung-telegram-bot-golang/src/helper"
 	"github.com/bandung-telegram-bot-golang/src/message"
+	"gopkg.in/tucnak/telebot.v2"
 )
 
 func MatchDoneSnack() string {
@@ -27,6 +28,7 @@ func DoneSnack() string {
 
 	if strings.Contains(contentMessage, "Yeay") {
 		sendTo = sendToGroup
+		bot.Send(sendToPrivate, message.PostToChannel(), telebot.ModeHTML)
 	} else {
 		sendTo = sendToPrivate
 	}

@@ -2,6 +2,7 @@ package message
 
 import (
 	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -188,4 +189,9 @@ func AskSnack(username, text string) string {
 	}
 
 	return header
+}
+
+func PostToChannel() string {
+	content := "Makasih snacknya, Kak 😇\nSudah diposting di channel " + os.Getenv("ID_SNACK") + " yaa"
+	return content
 }

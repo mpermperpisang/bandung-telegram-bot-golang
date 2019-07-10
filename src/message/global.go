@@ -19,7 +19,6 @@ func EmptyBookDoneStaging(username, command string) string {
 
 func StagingNotFound(staging string) string {
 	return "Staging <b>" + strings.ToUpper(staging) + "</b> tidak ditemukan, Kak. Tambahkan dulu ke daftar yaa"
-
 }
 
 func EmptySquadStaging(username, command string) string {
