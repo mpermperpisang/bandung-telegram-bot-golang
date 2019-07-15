@@ -17,7 +17,7 @@ import (
 )
 
 var TokenSnack, UsernameSnack, FullnameSnack string
-var ChatIDSnack, PrivateIDSnack string
+var ChatIDSnack, PrivateIDSnack, ChatGroupSnack string
 
 type PrivateSnack struct {
 	IDPrivateSnack string
@@ -48,6 +48,7 @@ func init() {
 	UsernameSnack = os.Getenv("BOT_SNACK")
 	FullnameSnack = os.Getenv("NAME_SNACK")
 	ChatIDSnack = os.Getenv("ID_SNACK")
+	ChatGroupSnack = os.Getenv("ID_GROUP")
 	// env untuk id bot owner
 	PrivateIDSnack = os.Getenv("ID_PRIVATE")
 }
@@ -55,6 +56,7 @@ func init() {
 func main() {
 	greetingBotOwner := &PrivateSnack{PrivateIDSnack}
 	postToGroup := &GroupSnack{ChatIDSnack}
+	postToBdg := &GroupSnack{ChatGroupSnack}
 	bot, err := tb.NewBot(tb.Settings{
 		Token:  TokenSnack,
 		Poller: &tb.LongPoller{Timeout: 10 * time.Second},
@@ -102,7 +104,7 @@ func main() {
 			bot.Send(m.Sender, content, tb.ModeHTML)
 
 			if strings.Contains(content, "selanjutnya") {
-				bot.Send(postToGroup, message.OnboardingSuccess(m.Text, m.Sender.Username), tb.ModeHTML)
+				bot.Send(postToBdg, message.OnboardingSuccess(m.Text, m.Sender.Username), tb.ModeHTML)
 			}
 		} else {
 			for i := 0; i < len(commandBot); i++ {
