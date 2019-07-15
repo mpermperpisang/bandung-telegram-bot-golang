@@ -64,7 +64,7 @@ func main() {
 	helper.ErrorMessage(err)
 
 	bot.Send(greetingBotOwner, message.OnlineMessage(FullnameSnack), tb.ModeHTML)
-	bot.Send(postToGroup, message.OnlineMessage(FullnameSnack), tb.ModeHTML)
+	// bot.Send(postToGroup, message.OnlineMessage(FullnameSnack), tb.ModeHTML)
 
 	bot.Handle(tb.OnAddedToGroup, func(m *tb.Message) {
 		bot.Send(m.Chat, message.AddedGroup(m.Chat.Title), tb.ModeHTML)
