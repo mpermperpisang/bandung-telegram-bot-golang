@@ -40,6 +40,7 @@ func ValidOnboarding() string {
 		"🐾 https://t.me/joinchat/HgqJSBGPu9Rl-OpceBHwUw Grup Action figure\n" +
 		"🐾 https://t.me/joinchat/EH0nV0kmrExNs7dmMD4fAA Grup Patungan kado\n" +
 		"🐾 https://t.me/joinchat/DCcWMBW5viw4wVFqvUC7eQ Grup Otomotif\n" +
+		"🐾 https://t.me/joinchat/GFBX0RM6fHs8sLV6BHydsQ Grup Music\n" +
 		"🐾 Grup Futsal. Silahkan menghubungi Kak @ivantedja\n\n" +
 		"Selamat bergabung dengan Bukalapak Bandung yaa, Kak. Let's rock and roll 🎉🥳🤟🏻"
 }
